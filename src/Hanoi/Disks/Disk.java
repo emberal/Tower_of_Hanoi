@@ -7,10 +7,9 @@ public class Disk {
     private int size;
     private Position position;
 
-    public Disk(int size) {
-
+    public Disk(int size, Position position) {
         this.size = size;
-        position = Position.LEFT;
+        this.position = position;
     }
 
     @Override

@@ -10,10 +10,10 @@ public class Game {
     Disks right;
 
 
-    public Game(int GAME_SIZE) {
-        left = new Disks(GAME_SIZE);
-        center = new Disks();
-        right = new Disks();
+    public Game(int DISKS) {
+        left = new Disks(DISKS, Position.LEFT);
+        center = new Disks(0, Position.CENTER);
+        right = new Disks(0, Position.RIGHT);
     }
 
     public void printAllArrays() {

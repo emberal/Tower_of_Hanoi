@@ -1,5 +1,6 @@
 package Hanoi.Disks;
 
+import Hanoi.Game.Position;
 import Hanoi.Main;
 
 import java.util.Arrays;
@@ -14,13 +15,13 @@ public class Disks { //TODO get disksize from array
     private int nr = 0;
 
     //Constructor
-    public Disks(int GAME_SIZE) {
+    public Disks(int DISKS, Position position) {
 
-        disks = new Disk[GAME_SIZE]; //Number of poles * number of disks
+        disks = new Disk[Main.GAME_SIZE]; //Number of poles * number of disks
 
-        for (; nr < Main.DISKS; nr++) {
+        for (; nr < DISKS; nr++) {
 
-            disks[nr] = new Disk(nr);
+            disks[nr] = new Disk(nr, position);
 
         }
     }
@@ -49,8 +50,9 @@ public class Disks { //TODO get disksize from array
                 System.out.println(d);
             }
         }else {
-            System.out.println("null");
+            System.out.println(Arrays.toString(this.disks));
         }
+        System.out.println("Length: '" + this.disks.length + "' Number of spaces used: '" + this.nr + '\'');
     }
     @Override
     public String toString() {
