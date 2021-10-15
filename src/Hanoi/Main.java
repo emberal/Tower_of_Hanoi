@@ -4,11 +4,16 @@ import Hanoi.Game.Game;
 import easygraphics.EasyGraphics;
 
 public class Main extends EasyGraphics {
+
+    public static final int POLES = 3;
+    public static final int DISKS = 3;
+    public static final int GAME_SIZE = POLES * DISKS;
+
     public static void main(String[] args) {
 
-        Game game = new Game(3);
+        Game game = new Game(GAME_SIZE);
 
-        game.printArray();
+        game.printAllArrays();
         launch(args);
     }
 

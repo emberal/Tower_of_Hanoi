@@ -1,25 +1,24 @@
 package Hanoi.Disks;
 
+import Hanoi.Main;
+
 import java.util.Arrays;
 
 public class Disks { //TODO get disksize from array
 
-    //Classattribute
-    private static int nr = 0;
-
     //Constant
-    private int gameSize;
+    private int GAME_SIZE;
 
     //Objectattribute
     private Disk[] disks;
-    private Disk size;
+    private int nr = 0;
 
     //Constructor
-    public Disks(int gameSize) {
+    public Disks(int GAME_SIZE) {
 
-        disks = new Disk[gameSize];
+        disks = new Disk[GAME_SIZE]; //Number of poles * number of disks
 
-        for (; nr < gameSize; nr++) {
+        for (; nr < Main.DISKS; nr++) {
 
             disks[nr] = new Disk(nr);
 
@@ -27,6 +26,8 @@ public class Disks { //TODO get disksize from array
     }
 
     public Disks() {
+
+        disks = new Disk[GAME_SIZE];
 
     }
 
@@ -41,14 +42,15 @@ public class Disks { //TODO get disksize from array
         return this.disks == null;
     }
     //Prints array
-    public void printArray() {
+    public void printArray() { //TODO Print when null
 
         if (!isEmpty() ) {
             for (Disk d : this.disks) {
                 System.out.println(d);
             }
+        }else {
+            System.out.println("null");
         }
-        System.out.println("null");
     }
     @Override
     public String toString() {
@@ -57,14 +59,14 @@ public class Disks { //TODO get disksize from array
 
     //Getters & setters
     public void setGameSize(int gameSize) {
-        this.gameSize = gameSize;
+        this.GAME_SIZE = gameSize;
     }
-    public static int getNr() {
-        return nr;
+    public int getNr() {
+        return this.nr;
     }
 
-    public static void setNr(int nr) {
-        Disks.nr = nr;
+    public void setNr(int nr) {
+        this.nr = nr;
     }
 
     public Disk[] getDisks() {
@@ -76,6 +78,6 @@ public class Disks { //TODO get disksize from array
     }
 
     public int getGameSize() {
-        return gameSize;
+        return GAME_SIZE;
     }
 }
