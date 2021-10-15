@@ -1,11 +1,15 @@
 package Hanoi.Disks;
 
+import Hanoi.Game.Position;
+
 public class Disk {
 
     private int size;
+    private Position position;
 
-    public Disk() { //TODO add to array
-        //Disk[] disks = new Disk[Disks.getSize() ];
+    public Disk() {
+
+        position = Position.LEFT;
     }
 
     public int getSize() {
@@ -14,5 +18,13 @@ public class Disk {
 
     public void setSize(int size) {
         this.size = size;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
     }
 }

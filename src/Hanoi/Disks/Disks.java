@@ -4,16 +4,23 @@ import java.util.Arrays;
 
 public class Disks { //TODO get disksize from array
 
+    //Classattribute
+    private static int nr = 0;
+
     //Constant
     private static final int SIZE = 3; //TODO setnr variable
 
-    //Attributes
-    private static int nr = 0;
+    //Objectattribute
     private Disk[] disks = new Disk[SIZE];
 
     //Constructor
     public Disks() {
 
+        for (;nr < SIZE; nr++) {
+
+            disks[nr] = new Disk();
+            disks[nr].setSize(nr);
+        }
     }
 
     //Adds disk to array
