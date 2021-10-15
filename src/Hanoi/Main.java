@@ -1,20 +1,14 @@
 package Hanoi;
 
-import Hanoi.Disks.Disk;
-import Hanoi.Disks.Disks;
+import Hanoi.Game.Game;
 import easygraphics.EasyGraphics;
 
 public class Main extends EasyGraphics {
     public static void main(String[] args) {
 
-        //TODO move to array
-        Disk disk1 = new Disk();
-        Disk disk2 = new Disk();
-        Disk disk3 = new Disk();
+        Game game = new Game(3);
 
-        Disks disks = new Disks();
-
-        disks.printArray();
+        game.printArray();
         launch(args);
     }
 

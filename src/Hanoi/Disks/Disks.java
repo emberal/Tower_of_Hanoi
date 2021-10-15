@@ -8,43 +8,57 @@ public class Disks { //TODO get disksize from array
     private static int nr = 0;
 
     //Constant
-    private static final int SIZE = 3; //TODO setnr variable
+    private int gameSize;
 
     //Objectattribute
-    private Disk[] disks = new Disk[SIZE];
+    private Disk[] disks;
+    private Disk size;
 
     //Constructor
+    public Disks(int gameSize) {
+
+        disks = new Disk[gameSize];
+
+        for (; nr < gameSize; nr++) {
+
+            disks[nr] = new Disk(nr);
+
+        }
+    }
+
     public Disks() {
 
-        for (;nr < SIZE; nr++) {
-
-            disks[nr] = new Disk();
-            disks[nr].setSize(nr);
-        }
     }
 
     //Adds disk to array
     public void add(Disk disk) {
         disk.setSize(nr);
-        disks[nr] = disk;
+        this.disks[nr] = disk;
         nr++;
     }
 
+    public boolean isEmpty() {
+        return this.disks == null;
+    }
     //Prints array
     public void printArray() {
 
-        for (Disk d: disks) {
-            System.out.println(d);
+        if (!isEmpty() ) {
+            for (Disk d : this.disks) {
+                System.out.println(d);
+            }
         }
-
+        System.out.println("null");
     }
-
     @Override
     public String toString() {
         return "Disks{disks=" + Arrays.toString(disks) + '}';
     }
 
     //Getters & setters
+    public void setGameSize(int gameSize) {
+        this.gameSize = gameSize;
+    }
     public static int getNr() {
         return nr;
     }
@@ -61,7 +75,7 @@ public class Disks { //TODO get disksize from array
         this.disks = disks;
     }
 
-    public static int getSize() {
-        return SIZE;
+    public int getGameSize() {
+        return gameSize;
     }
 }

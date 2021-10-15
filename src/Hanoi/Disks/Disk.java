@@ -7,9 +7,18 @@ public class Disk {
     private int size;
     private Position position;
 
-    public Disk() {
+    public Disk(int size) {
 
+        this.size = size;
         position = Position.LEFT;
+    }
+
+    @Override
+    public String toString() {
+        return  "Disk{" +
+                "size=" + size +
+                ", position=" + position +
+                '}';
     }
 
     public int getSize() {
