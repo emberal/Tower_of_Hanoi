@@ -13,11 +13,12 @@ public class Disks { //TODO get disksize from array
     //Objectattribute
     private Disk[] disks;
     private int nr = 0;
+    private Position position; //TODO check if nessessary
 
     //Constructor
     public Disks(int DISKS, Position position) {
 
-        disks = new Disk[Main.GAME_SIZE]; //Number of poles * number of disks
+        disks = new Disk[Main.DISKS]; //Number of poles * number of disks
 
         for (; nr < DISKS; nr++) {
 
@@ -32,16 +33,24 @@ public class Disks { //TODO get disksize from array
 
     }
 
-    //Adds disk to array
-    public void add(Disk disk) {
+    //Adds a disk to array
+    public void add(Disk disk) { //TODO test pretty sure it's wrong
         disk.setSize(nr);
-        this.disks[nr] = disk;
+        disks[nr] = disk;
         nr++;
     }
 
+    //Removes the last disk from array
+    public void removeLast() {
+        disks[disks.length-1] = null;
+        nr--;
+    }
+
+    //Checks if array is empty, return true if it is
     public boolean isEmpty() {
         return this.disks == null;
     }
+
     //Prints array
     public void printArray() { //TODO Print when null
 

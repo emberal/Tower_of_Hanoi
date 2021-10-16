@@ -7,7 +7,6 @@ public class Main extends EasyGraphics {
 
     public static final int POLES = 3;
     public static final int DISKS = 3;
-    public static final int GAME_SIZE = POLES * DISKS;
 
     public static void main(String[] args) {
 
@@ -40,7 +39,7 @@ public class Main extends EasyGraphics {
         drawLine(x, y, X - x, y);
 
         //Pillars
-        for (int posX = 200; posX <= 600; posX += 200) {
+        for (int posX = 200; posX <= posX * POLES; posX += 200) {
             drawLine(posX,y,posX,y/2);
         }
 
