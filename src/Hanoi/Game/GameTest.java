@@ -16,8 +16,8 @@ class GameTest { //TODO tests
         Assertions.assertEquals(0, game.getPoles()[2].getNr());
 
         Assertions.assertEquals(Position.LEFT, game.getPoles()[0].getPole()[0].getPosition());
-        Assertions.assertNull(game.getPoles()[1].getPole()[0]);
-        Assertions.assertNull(game.getPoles()[2].getPole()[0]);
+        Assertions.assertNull(game.getPoles()[1].getPole()[0]); //TODO add disk and test Position
+        Assertions.assertNull(game.getPoles()[2].getPole()[0]); //TODO add disk and test Position
     }
 
 }
