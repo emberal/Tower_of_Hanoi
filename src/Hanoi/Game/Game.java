@@ -1,48 +1,36 @@
 package Hanoi.Game;
 
-import Hanoi.Disks.Disks;
+import Hanoi.Disks.Pole;
+import Hanoi.Main;
 
 public class Game {
 
-    Disks left;
-    Disks center;
-    Disks right;
-
+    Pole[] poles = new Pole[Main.POLES];
 
     public Game(int DISKS) {
-        left = new Disks(DISKS, Position.LEFT);
-        center = new Disks(0, Position.CENTER);
-        right = new Disks(0, Position.RIGHT);
+
+        poles[0] = new Pole(DISKS, Position.LEFT); //Starting disks
+
+        for (int i = 1; i < Main.POLES; i++) { //Rest of the disks
+            for (Position p : Position.values() ) {
+                poles[i] = new Pole(0, p);
+            }
+        }
     }
 
     public void printAllArrays() {
-        left.printArray();
-        center.printArray();
-        right.printArray();
+
+        for (Pole d : poles) {
+            d.printArray();
+        }
     }
 
-
-    public Disks getLeft() {
-        return left;
+    public Pole[] getPoles() {
+        return poles;
     }
 
-    public void setLeft(Disks left) {
-        this.left = left;
+    public void setPoles(Pole[] poles) {
+        this.poles = poles;
     }
 
-    public Disks getCenter() {
-        return center;
-    }
-
-    public void setCenter(Disks center) {
-        this.center = center;
-    }
-
-    public Disks getRight() {
-        return right;
-    }
-
-    public void setRight(Disks right) {
-        this.right = right;
-    }
 }
