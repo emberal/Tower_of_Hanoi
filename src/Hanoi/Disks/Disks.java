@@ -12,7 +12,7 @@ public class Disks { //TODO get disksize from array
 
     //Objectattribute
     private Disk[] disks;
-    private int nr = 0;
+    private int nr = 0; //Number of Disks in the array
     private Position position; //TODO check if nessessary
 
     //Constructor
@@ -29,32 +29,41 @@ public class Disks { //TODO get disksize from array
 
     public Disks() {
 
-        disks = new Disk[GAME_SIZE];
+        this.disks = new Disk[GAME_SIZE];
+
+    }
+
+    //Moves a disk to the given position
+    public void moveTo(Disks disks) {
+
+        if (!this.isEmpty() ) {
+            disks.add(this.removeLast() );
+        }
 
     }
 
     //Adds a disk to array
-    public void add(Disk disk) { //TODO test pretty sure it's wrong
-        disk.setSize(nr);
-        disks[nr] = disk;
+    public void add(Disk disk) {
+
+        this.disks[nr] = disk;
         nr++;
     }
 
     //Removes the last disk from array
-    public void removeLast() {
-        disks[disks.length-1] = null;
+    public Disk removeLast() {
         nr--;
+        return this.disks[this.nr];
     }
 
     //Checks if array is empty, return true if it is
     public boolean isEmpty() {
-        return this.disks == null;
+        return this.nr == 0;
     }
 
     //Prints array
     public void printArray() { //TODO Print when null
 
-        if (!isEmpty() ) {
+        if (isEmpty()) {
             for (Disk d : this.disks) {
                 System.out.println(d);
             }

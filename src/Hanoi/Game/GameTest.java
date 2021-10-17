@@ -11,10 +11,6 @@ class GameTest { //TODO tests
     }
 
     @Test
-    void moveTo() {
-    }
-
-    @Test
     void getLeft() {
     }
 
