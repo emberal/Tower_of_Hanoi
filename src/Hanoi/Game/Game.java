@@ -12,8 +12,8 @@ public class Game {
         poles[0] = new Pole(DISKS, Position.LEFT); //Starting disks
 
         for (int i = 1; i < Main.POLES; i++) { //Rest of the disks
-            for (Position p : Position.values() ) {
-                poles[i] = new Pole(0, p);
+            for (Position p : Position.values() ) { //TODO check values DEBUG!
+                poles[i] = new Pole(0, p); //TODO fix loops, 
             }
         }
     }
