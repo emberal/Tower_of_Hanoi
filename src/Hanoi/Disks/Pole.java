@@ -19,6 +19,7 @@ public class Pole { //TODO get disksize from array
     public Pole(int DISKS, Position position) {
 
         pole = new Disk[Main.DISKS];
+        this.position = position;
 
         for (; nr < DISKS; nr++) {
 
@@ -34,18 +35,24 @@ public class Pole { //TODO get disksize from array
     }
 
     //Moves a disk to the given position
-    public void moveTo(Pole pole) {
+    public boolean moveTo(Pole pole) {
 
         if (!isEmpty() && isLegal(pole) ) {
             pole.add(removeLast() );
+            pole.seeLast().setPosition(pole.position); //Sets the position of the disk to be equal to the pole
+            return true;
         }
+        return false;
     }
 
     //Checks if a move is legal, a move is legal if the pole it's moved to is empty
     //  or the disks on the pole are bigger than the one we are moving
     public boolean isLegal(Pole pole) {
 
-        return pole.isEmpty() || pole.seeLast().getSize() < this.getNr();
+        if (!isEmpty() ) {
+            return pole.isEmpty() || pole.seeLast().getSize() < this.seeLast().getSize();
+        }
+        return false; //TODO TEST
     }
 
     //Adds a disk to array
@@ -59,19 +66,30 @@ public class Pole { //TODO get disksize from array
         return false;
     }
 
-    //Removes the last disk from array
+    //Removes the last disk from an array
     public Disk removeLast() {
 
-        if (!isEmpty() ) {
+        return remove(nr-1);
+
+    }
+
+    //Removes any disk from an array
+    public Disk remove (int pos) {
+
+        if (!isEmpty() ) { //TODO if necessarry. If a disk is taken from the middle of the pole, move the others down, to avoid nullpointer
+            Disk disk = pole[pos];
+
+            pole[pos] = null;
             nr--;
-            return pole[nr];
+            return disk;
         }
         return null;
     }
 
+    //Returns the disk with the highest nr on a pole
     public Disk seeLast() {
         if (!isEmpty() ) {
-            return pole[nr];
+            return pole[nr-1];
         }
         return null;
     }

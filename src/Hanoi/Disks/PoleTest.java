@@ -28,17 +28,17 @@ class PoleTest {
         Assertions.assertEquals(1, pole2.getNr());
         Assertions.assertEquals(0, pole3.getNr());
 
-        pole1.moveTo(pole2);
+        Assertions.assertTrue(pole1.moveTo(pole2));
 
         Assertions.assertEquals(2, pole1.getNr());
         Assertions.assertEquals(2, pole2.getNr());
 
-        pole3.moveTo(pole2);
+        Assertions.assertFalse(pole3.moveTo(pole2));
 
         Assertions.assertEquals(0, pole3.getNr());
         Assertions.assertEquals(2, pole2.getNr());
 
-        pole4.moveTo(pole3);
+        Assertions.assertFalse(pole4.moveTo(pole3));
 
         Assertions.assertEquals(0, pole4.getNr());
         Assertions.assertEquals(0, pole3.getNr());
@@ -75,7 +75,32 @@ class PoleTest {
     }
 
     @Test
+    void remove () {
+
+        setUp();
+
+        pole1.remove(1);
+
+        Assertions.assertEquals(2, pole1.getNr());
+
+    }
+
+    @Test
     void isLegal() { //TODO Test
+
+        setUp();
+
+        Assertions.assertTrue(pole1.isLegal(pole2));
+        Assertions.assertTrue(pole1.moveTo(pole2));
+
+        Assertions.assertFalse(pole1.isLegal(pole2));
+        Assertions.assertFalse(pole1.moveTo(pole2));
+
+        Assertions.assertFalse(pole3.isLegal(pole2));
+        Assertions.assertFalse(pole3.moveTo(pole2));
+
+        Assertions.assertTrue(pole2.isLegal(pole3));
+        Assertions.assertTrue(pole2.moveTo(pole3));
     }
 
     @Test
