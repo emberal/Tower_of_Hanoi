@@ -7,9 +7,6 @@ import java.util.Arrays;
 
 public class Pole { //TODO get disksize from array
 
-    //Constant
-    private int GAME_SIZE;
-
     //Objectattribute
     private Disk[] pole;
     private int nr = 0; //Number of Disks in the array
@@ -26,12 +23,6 @@ public class Pole { //TODO get disksize from array
             pole[nr] = new Disk(nr, position);
 
         }
-    }
-
-    public Pole() {
-
-        this.pole = new Disk[GAME_SIZE];
-
     }
 
     //Moves a disk to the given position
@@ -58,7 +49,7 @@ public class Pole { //TODO get disksize from array
     //Adds a disk to array
     public boolean add(Disk disk) {
 
-        if (nr != 3) {
+        if (nr != Main.DISKS) {
             pole[nr] = disk;
             nr++;
             return true;
@@ -118,9 +109,6 @@ public class Pole { //TODO get disksize from array
     }
 
     //Getters & setters
-    public void setGameSize(int gameSize) {
-        this.GAME_SIZE = gameSize;
-    }
     public int getNr() {
         return this.nr;
     }
@@ -135,10 +123,6 @@ public class Pole { //TODO get disksize from array
 
     public void setPole(Disk[] pole) {
         this.pole = pole;
-    }
-
-    public int getGameSize() {
-        return GAME_SIZE;
     }
 
     public Position getPosition() {
