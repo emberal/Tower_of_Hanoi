@@ -29,8 +29,11 @@ public class Pole { //TODO get disksize from array
     public boolean moveTo(Pole pole) {
 
         if (!isEmpty() && isLegal(pole) ) {
+            System.out.println("Moving " + this.seeLast() + " to " + pole.getPosition() );
+
             pole.add(removeLast() );
             pole.seeLast().setPosition(pole.position); //Sets the position of the disk to be equal to the pole
+
             return true;
         }
         return false;

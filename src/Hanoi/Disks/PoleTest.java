@@ -120,7 +120,7 @@ class PoleTest {
     }
 
     @Test
-    void printArray() {
+    void printArray() { //TODO TEST
 
         setUp();
 
@@ -128,7 +128,7 @@ class PoleTest {
         pole2.printArray();
         pole3.printArray();
 
-        new Pole().printArray();
+        //new Pole().printArray();
 
     }
 
