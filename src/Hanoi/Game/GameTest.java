@@ -20,4 +20,9 @@ class GameTest { //TODO tests
         Assertions.assertNull(game.getPoles()[2].getPole()[0]); //TODO add disk and test Position
     }
 
+    @Test
+    void isFinished() { //TODO TEST
+
+    }
+
 }

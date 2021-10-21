@@ -7,14 +7,17 @@ public class Disk {
     private int size;
     private Position position;
 
+    private final Position polePos;
+
     public Disk(int size, Position position) {
         this.size = size;
         this.position = position;
+        polePos = position;
     }
 
     @Override
     public String toString() {
-        return  "Disk{" +
+        return  polePos + "{" +
                 "size=" + size +
                 ", position=" + position +
                 '}';

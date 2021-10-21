@@ -1,6 +1,5 @@
 package Hanoi;
 
-import Hanoi.Disks.Pole;
 import Hanoi.Game.Game;
 import easygraphics.EasyGraphics;
 
@@ -10,12 +9,11 @@ public class Main extends EasyGraphics {
 
     public static final int POLES = 3;
     public static final int DISKS = 3;
+    public static int turns = 0;
 
-    static Game game = new Game(DISKS);
+    private static final Game game = new Game(DISKS);
 
-    public static void main (String[] args) {
-
-        game.printAllArrays();
+    public static void main(String[] args) {
         launch(args);
     }
 
@@ -23,7 +21,7 @@ public class Main extends EasyGraphics {
     private final int Y = 400;
 
     @Override
-    public void run () {
+    public void run() {
         makeWindow("Tower of Hanoi", X, Y);
 
         //Border
@@ -31,30 +29,29 @@ public class Main extends EasyGraphics {
 
         drawBoard();
 
-        play();
+        startGame();
 
     }
 
-    private void drawBoard () {
+    private void drawBoard() {
 
-        final int y = Y - Y / 3;
-        final int x = X / 8;
-        final int distance = 200;
+        final int Y = this.Y - this.Y / 3;
+        final int X = this.X / 8;
+        final int DISTANCE = 200;
 
         //Bottom line
-        drawLine(x, y, X - x, y); //TODO change size depending on number of poles, and disks
+        drawLine(X, Y, this.X - X, Y); //TODO change size depending on number of poles, and disks
 
         //Pillars
-        for (int posX = distance; posX <= distance * POLES; posX += distance) {
-            drawLine(posX, y, posX, y / 2); //TODO Give each pole a name (1, 2, 3...)
+        for (int x = DISTANCE; x <= DISTANCE * POLES; x += DISTANCE) {
+            drawLine(x, Y, x, Y / 2); //TODO Give each pole a name (1, 2, 3...)
         } //TODO write contents of poles on the screen
         //TODO Finish drawing
     }
 
     //Starts the game
-    private void play () {
+    private void startGame() {
 
-        int posFrom = 0, posTo = 0;
         boolean ok;
         String numberFormatExc = "Invalid input, must be an integer number";
         String arrayOutOfBounds = "Invalid input, out of bounds";
@@ -62,18 +59,7 @@ public class Main extends EasyGraphics {
         do { //Choose Pole
             ok = true;
             try {
-                posFrom = Integer.parseInt(getText("Choose pole (0 - " + (POLES - 1) + ")"));
-
-                if (game.getPoles()[posFrom].isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "No disks in pole, try a different one!");
-                    ok = false;
-                }
-                else {
-                    System.out.println(game.getPoles()[posFrom].getPosition() + " selected");
-
-                    posTo = Integer.parseInt(getText("Choose pole (0 - " + (POLES - 1) + ")"));
-                    game.getPoles()[posFrom].moveTo(game.getPoles()[posTo]);
-                }
+                move();
             }
             catch (NumberFormatException e) {
                 ok = false;
@@ -83,10 +69,37 @@ public class Main extends EasyGraphics {
                 ok = false;
                 JOptionPane.showMessageDialog(null, arrayOutOfBounds);
             }
-            if (posFrom == posTo) {
-                ok = false;
-                JOptionPane.showMessageDialog(null, "You can't choose the same pole");
-            }
-        } while (! ok);
+
+        } while (!ok);
     }
+
+    private void move() {
+
+        int posFrom, posTo = 0;
+
+        do {
+            posFrom = Integer.parseInt(getText("Choose pole (0 - " + (POLES - 1) + ")") );
+
+            if (game.getPoles()[posFrom].isEmpty() ) {
+                JOptionPane.showMessageDialog(null, "No disks in pole, try a different one!");
+            }
+            else {
+                System.out.println(game.getPoles()[posFrom].getPosition() + " selected");
+
+                posTo = Integer.parseInt(getText("Choose pole (0 - " + (POLES - 1) + ")") );
+                if (posFrom == posTo) {
+                    JOptionPane.showMessageDialog(null, "You can't choose the same pole");
+                }
+                else {
+                    game.getPoles()[posFrom].moveTo(game.getPoles()[posTo]);
+
+                    game.printAllArrays();
+                }
+            }
+
+        } while (!game.isFinished() );
+
+        JOptionPane.showMessageDialog(null, "Congratulations, you won!\nIt took you " + turns + " turns");
+    }
+
 }

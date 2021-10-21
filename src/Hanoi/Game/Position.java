@@ -5,6 +5,6 @@ package Hanoi.Game;
 public enum Position {
     LEFT,
     CENTER,
-    RIGHT;
+    RIGHT
 
 }

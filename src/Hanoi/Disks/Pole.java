@@ -33,6 +33,7 @@ public class Pole { //TODO get disksize from array
 
             pole.add(removeLast() );
             pole.seeLast().setPosition(pole.position); //Sets the position of the disk to be equal to the pole
+            Main.turns++;
 
             return true;
         }
@@ -44,8 +45,11 @@ public class Pole { //TODO get disksize from array
     public boolean isLegal(Pole pole) {
 
         if (!isEmpty() ) {
-            return pole.isEmpty() || pole.seeLast().getSize() < this.seeLast().getSize();
+            if (pole.isEmpty() || pole.seeLast().getSize() < this.seeLast().getSize() ) {
+                return true;
+            }
         }
+        System.out.println("Not a legal move!");
         return false; //TODO TEST
     }
 
@@ -96,12 +100,14 @@ public class Pole { //TODO get disksize from array
     //Prints array
     public void printArray() { //TODO Print when null
 
-        if (!isEmpty()) {
+        if (!isEmpty() ) {
             for (Disk d : pole) {
-                System.out.println(d);
+                System.out.print(d + "\t");
             }
-        }else {
-            System.out.println(Arrays.toString(pole));
+            System.out.println();
+        }
+        else {
+            System.out.println(position + "{" + Arrays.toString(pole) + "}" );
         }
         System.out.println("Length: '" + pole.length + "' Number of spaces used: '" + nr + '\'');
     }
