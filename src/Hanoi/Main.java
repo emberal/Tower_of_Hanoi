@@ -49,6 +49,11 @@ public class Main extends EasyGraphics {
         //TODO Finish drawing
     }
 
+    //Draws the disks
+    private void drawDisk() { //TODO complete
+        int size = game.getPoles()[0].getPole()[0].getSize(); //Refers to the size of the disk in position 0, in pole 0
+    }
+
     //Starts the game
     private void startGame() {
 
@@ -75,7 +80,7 @@ public class Main extends EasyGraphics {
 
     private void move() {
 
-        int posFrom, posTo = 0;
+        int posFrom, posTo;
 
         do {
             posFrom = Integer.parseInt(getText("Choose pole (0 - " + (POLES - 1) + ")") );
@@ -100,6 +105,14 @@ public class Main extends EasyGraphics {
         } while (!game.isFinished() );
 
         JOptionPane.showMessageDialog(null, "Congratulations, you won!\nIt took you " + turns + " turns");
+    }
+
+    //For testing
+    protected void privates() {
+        drawBoard();
+        drawDisk();
+        startGame();
+        move();
     }
 
 }

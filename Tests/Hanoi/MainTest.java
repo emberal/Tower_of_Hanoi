@@ -8,9 +8,16 @@ class MainTest {
 
     @Test
     void main() {
+
     }
 
     @Test
     void run() {
+
+    }
+
+    @Test
+    void testPrivates() {
+
     }
 }
