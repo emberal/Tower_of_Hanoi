@@ -5,14 +5,13 @@ import Hanoi.Main;
 
 public class Game {
 
-    private Pole[] poles = new Pole[Main.POLES];
+    protected Pole[] poles = new Pole[Main.POLES];
 
     public Game(int DISKS) {
 
         poles[0] = new Pole(DISKS, Position.LEFT); //Starting disks
 
         for (int i = 1; i < Main.POLES; i++) { //Rest of the disks
-
             for (Position p : Position.values() ) { //TODO check values DEBUG!
 
                 if (p != Position.LEFT) {
@@ -55,4 +54,5 @@ public class Game {
     public void setPoles(Pole[] poles) {
         this.poles = poles;
     }
+
 }

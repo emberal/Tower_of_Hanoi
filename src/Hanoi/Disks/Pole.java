@@ -109,7 +109,7 @@ public class Pole { //TODO get disksize from array
         else {
             System.out.println(position + "{" + Arrays.toString(pole) + "}" );
         }
-        System.out.println("Length: '" + pole.length + "' Number of spaces used: '" + nr + '\'');
+        //System.out.println("Length: '" + pole.length + "' Number of spaces used: '" + nr + '\'');
     }
 
     @Override
