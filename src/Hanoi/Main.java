@@ -4,7 +4,7 @@ import Hanoi.Game.Game;
 import Hanoi.Game.Play;
 import easygraphics.EasyGraphics;
 
-public class Main extends EasyGraphics {
+public class Main extends EasyGraphics { //TODO get size from player input
 
     public static final int POLES = 3;
     public static final int DISKS = 3;

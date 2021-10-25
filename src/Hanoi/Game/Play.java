@@ -49,12 +49,14 @@ public class Play extends Draw { //TODO Autoplay
                 System.out.println(game.getPoles()[posFrom].getPosition() + " selected");
 
                 posTo = Integer.parseInt(getText("Choose pole (0 - " + (Main.POLES - 1) + ")") );
+
                 if (posFrom == posTo) {
                     JOptionPane.showMessageDialog(null, "You can't choose the same pole");
                 }
-                else {
+                else { //If move is successful
                     game.getPoles()[posFrom].moveTo(game.getPoles()[posTo]);
 
+                    drawDisks();
                     game.printAllArrays();
                 }
             }

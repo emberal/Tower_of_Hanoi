@@ -5,7 +5,7 @@ import Hanoi.Main;
 
 import java.util.Arrays;
 
-public class Pole { //TODO get disksize from array
+public class Pole {
 
     //Objectattribute
     private Disk[] pole;
@@ -56,7 +56,7 @@ public class Pole { //TODO get disksize from array
     //Adds a disk to array
     public boolean add(Disk disk) {
 
-        if (nr != Main.DISKS) {
+        if (nr < Main.DISKS) {
             pole[nr] = disk;
             nr++;
             return true;
@@ -98,7 +98,7 @@ public class Pole { //TODO get disksize from array
     }
 
     //Prints array
-    public void printArray() { //TODO Print when null
+    public void printArray() {
 
         if (!isEmpty() ) {
             for (Disk d : pole) {

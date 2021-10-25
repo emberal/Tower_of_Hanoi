@@ -45,13 +45,21 @@ public class Draw extends EasyGraphics {
     }
 
     //Draws the disks
-    private void drawDisks() { //TODO complete
-        //int size = game.getPoles()[0].getPole()[0].getSize(); //Refers to the size of the disk in position 0, in pole 0
+    protected void drawDisks() { //TODO complete
+        //int diskSize = game.getPoles()[0].getPole()[0].getSize(); //Refers to the size of the disk in position 0, in pole 0
 
-        int pos = getBOTTOM();
-        for (int size = game.getPoles()[0].getNr()-1; size >= 0; size--) { //TODO draw in the correct position
-            fillEllipse(DISTANCE, pos, size*20+10, 10);
-            pos -= 20;
+        int poleX = DISTANCE;
+
+        for (int p = 0; p < game.getPoles().length; p++) {
+
+            int posY = getBOTTOM();
+
+            for (int size = game.getPoles()[p].getNr()-1; size >= 0; size--) { //TODO remove disk after moved
+
+                fillEllipse(poleX, posY, size*20+10, 10); //FIXME use correct diskSize
+                posY -= 20;
+            }
+            poleX += DISTANCE;
         }
     }
 
