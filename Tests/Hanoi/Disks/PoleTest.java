@@ -14,9 +14,8 @@ class PoleTest {
 
     void setUp() {
         pole1 = new Pole(3, Position.CENTER);
-        pole2 = new Pole(1, Position.RIGHT);
+        pole2 = new Pole(0, Position.RIGHT);
         pole3 = new Pole(0, Position.LEFT);
-        pole4 = new Pole(-1, Position.LEFT);
     }
 
     @Test
@@ -25,23 +24,18 @@ class PoleTest {
         setUp();
 
         Assertions.assertEquals(3, pole1.getNr());
-        Assertions.assertEquals(1, pole2.getNr());
+        Assertions.assertEquals(0, pole2.getNr());
         Assertions.assertEquals(0, pole3.getNr());
 
         Assertions.assertTrue(pole1.moveTo(pole2));
 
         Assertions.assertEquals(2, pole1.getNr());
-        Assertions.assertEquals(2, pole2.getNr());
+        Assertions.assertEquals(1, pole2.getNr());
 
         Assertions.assertFalse(pole3.moveTo(pole2));
 
         Assertions.assertEquals(0, pole3.getNr());
-        Assertions.assertEquals(2, pole2.getNr());
-
-        Assertions.assertFalse(pole4.moveTo(pole3));
-
-        Assertions.assertEquals(0, pole4.getNr());
-        Assertions.assertEquals(0, pole3.getNr());
+        Assertions.assertEquals(1, pole2.getNr());
     }
 
     @Test
@@ -54,7 +48,7 @@ class PoleTest {
         Assertions.assertTrue(pole3.add(new Disk(Position.RIGHT)));
 
         Assertions.assertEquals(3, pole1.getNr());
-        Assertions.assertEquals(2, pole2.getNr());
+        Assertions.assertEquals(1, pole2.getNr());
         Assertions.assertEquals(1, pole3.getNr());
 
     }
@@ -113,10 +107,9 @@ class PoleTest {
         setUp();
 
         Assertions.assertFalse(pole1.isEmpty());
-        Assertions.assertFalse(pole2.isEmpty());
+        Assertions.assertTrue(pole2.isEmpty());
 
         Assertions.assertTrue(pole3.isEmpty());
-        Assertions.assertTrue(pole4.isEmpty());
     }
 
     @Test

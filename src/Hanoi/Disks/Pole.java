@@ -45,7 +45,7 @@ public class Pole {
     public boolean isLegal(Pole pole) {
 
         if (!isEmpty() ) {
-            if (pole.isEmpty() || pole.seeLast().getSize() > this.seeLast().getSize() ) {
+            if (pole.isEmpty() || this.seeLast().getSize() < pole.seeLast().getSize() ) {
                 return true;
             }
         }
