@@ -21,7 +21,7 @@ public class Draw extends EasyGraphics {
     }
 
     @Override
-    public void run() {
+    protected void run() { //TODO TEST
         drawBoard();
         drawPoles();
         drawDisks();
@@ -63,7 +63,7 @@ public class Draw extends EasyGraphics {
     }
 
     //Draws the disks
-    protected void drawDisks() { //TODO change to move methods
+    private void drawDisks() { //TODO change to move methods TODO TEST
 
         int poleX = DISTANCE;
 
