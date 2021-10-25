@@ -1,11 +1,12 @@
 package Hanoi.Disks;
 
+import Hanoi.Draw.Draw;
 import Hanoi.Game.Position;
 import Hanoi.Main;
 
 import java.util.Arrays;
 
-public class Pole {
+public class Pole extends Draw {
 
     //Objectattribute
     private Disk[] pole;
@@ -31,6 +32,8 @@ public class Pole {
         if (!isEmpty() && isLegal(pole) ) {
             System.out.println("Moving " + this.seeLast() + " to " + pole.getPosition() );
 
+            //moveEllipse(super.disks[nr], 1,1); //TODO move method, change values!
+
             pole.add(removeLast() );
             pole.seeLast().setPosition(pole.position); //Sets the position of the disk to be equal to the pole
             Main.turns++;
@@ -50,7 +53,7 @@ public class Pole {
             }
         }
         System.out.println("Not a legal move!");
-        return false; //TODO TEST
+        return false;
     }
 
     //Adds a disk to array
@@ -67,12 +70,11 @@ public class Pole {
     //Removes the last disk from an array
     public Disk removeLast() {
 
-        return remove(nr-1);
-
+        return removeDisk(nr-1);
     }
 
     //Removes any disk from an array
-    public Disk remove (int pos) {
+    public Disk removeDisk(int pos) {
 
         if (!isEmpty() ) { //TODO if necessarry. If a disk is taken from the middle of the pole, move the others down, to avoid nullpointer
             Disk disk = pole[pos];

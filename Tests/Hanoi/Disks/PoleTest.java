@@ -9,8 +9,6 @@ class PoleTest {
     private Pole pole1;
     private Pole pole2;
     private Pole pole3;
-    private Pole pole4;
-
 
     void setUp() {
         pole1 = new Pole(3, Position.CENTER);
@@ -69,18 +67,18 @@ class PoleTest {
     }
 
     @Test
-    void remove () {
+    void removeDisk () {
 
         setUp();
 
-        pole1.remove(1);
+        pole1.removeDisk(1);
 
         Assertions.assertEquals(2, pole1.getNr());
 
     }
 
     @Test
-    void isLegal() { //TODO Test
+    void isLegal() {
 
         setUp();
 
@@ -98,7 +96,7 @@ class PoleTest {
     }
 
     @Test
-    void seeLast() { //TODO Test
+    void seeLast() {
     }
 
     @Test

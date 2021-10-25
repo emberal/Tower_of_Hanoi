@@ -6,8 +6,8 @@ import javax.swing.*;
 
 public class Play extends Draw { //TODO Autoplay
 
-    public Play(Game game, int X, int Y) {
-        super(game, X, Y);
+    public Play(Game game) {
+        super(game);
         startGame();
     }
 

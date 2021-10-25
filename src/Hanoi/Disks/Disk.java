@@ -7,7 +7,7 @@ public class Disk {
 
     private static int nr = Main.DISKS;
 
-    private int size;
+    private int size, xPos; //TODO
     private Position position;
 
     private final Position polePos;
@@ -24,6 +24,18 @@ public class Disk {
                 "size=" + size +
                 ", position=" + position +
                 '}';
+    }
+
+    public static int getNr() {
+        return nr;
+    }
+
+    public int getxPos() {
+        return xPos;
+    }
+
+    public void setxPos(int xPos) {
+        this.xPos = xPos;
     }
 
     public int getSize() {
