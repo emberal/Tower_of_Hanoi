@@ -9,20 +9,18 @@ public class Game {
 
     public Game(int DISKS) {
 
-        poles[0] = new Pole(DISKS, Position.LEFT); //Starting disks
+        int i = 0;
+        while (i < Main.POLES) {
+            for (Position p : Position.values() ) {
 
-        for (int i = 1; i < Main.POLES; i++) { //Rest of the disks
-            for (Position p : Position.values() ) { //TODO check values DEBUG!
-
-                if (p != Position.LEFT) {
-                    poles[i] = new Pole(0, p); //FIXME fix loops, showing wrong position
-                }
+                poles[i] = new Pole(DISKS, p); //Starting disks
+                DISKS = 0; i++; //Resets for the remaining disks
             }
         }
     }
 
     //Checks if the game is finished
-    public boolean isFinished() { //TODO TEST
+    public boolean isFinished() {
 
         for (Pole pole : poles) {
 

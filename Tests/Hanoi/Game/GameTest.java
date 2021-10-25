@@ -6,18 +6,23 @@ import org.junit.jupiter.api.Test;
 
 class GameTest { //TODO tests
 
+    Game game = new Game(Main.DISKS);
+
     @Test
     void constructor() {
 
-        Game game = new Game(Main.DISKS);
-
         Assertions.assertEquals(3, game.getPoles()[0].getNr());
-        Assertions.assertEquals(0, game.getPoles()[1].getNr());
-        Assertions.assertEquals(0, game.getPoles()[2].getNr());
+
+        for (int i = 1; i < Main.POLES; i++) {
+            Assertions.assertEquals(0, game.getPoles()[i].getNr());
+        }
+
+        game.getPoles()[0].moveTo(game.getPoles()[1]);
+        game.getPoles()[0].moveTo(game.getPoles()[2]);
 
         Assertions.assertEquals(Position.LEFT, game.getPoles()[0].getPole()[0].getPosition());
-        Assertions.assertNull(game.getPoles()[1].getPole()[0]); //TODO add disk and test Position
-        Assertions.assertNull(game.getPoles()[2].getPole()[0]); //TODO add disk and test Position
+        Assertions.assertEquals(Position.CENTER, game.getPoles()[1].getPole()[0].getPosition());
+        Assertions.assertEquals(Position.RIGHT, game.getPoles()[2].getPole()[0].getPosition());
     }
 
     @Test
