@@ -56,7 +56,7 @@ public class Play extends Draw { //TODO Autoplay
                 else { //If move is successful
                     game.getPoles()[posFrom].moveTo(game.getPoles()[posTo]);
 
-                    drawDisks();
+                    run();
                     game.printAllArrays();
                 }
             }

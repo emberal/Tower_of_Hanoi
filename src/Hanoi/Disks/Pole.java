@@ -20,7 +20,7 @@ public class Pole {
 
         for (; nr < DISKS; nr++) {
 
-            pole[nr] = new Disk(nr, position);
+            pole[nr] = new Disk(position);
 
         }
     }
@@ -45,7 +45,7 @@ public class Pole {
     public boolean isLegal(Pole pole) {
 
         if (!isEmpty() ) {
-            if (pole.isEmpty() || pole.seeLast().getSize() < this.seeLast().getSize() ) {
+            if (pole.isEmpty() || pole.seeLast().getSize() > this.seeLast().getSize() ) {
                 return true;
             }
         }

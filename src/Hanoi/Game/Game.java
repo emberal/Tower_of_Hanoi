@@ -28,12 +28,17 @@ public class Game {
 
             if (!pole.isEmpty() ) {
 
-                for (int i = 0; i < pole.getNr(); i++) {
+                int d = Main.POLES;
+                for (int p = 0; p < pole.getNr(); p++) {
 
-                    //Size of the pole should be equal to the position it's in
-                    if (!poles[0].isEmpty() || pole.getPole()[i].getSize() != i) {
+                    //Size of the disks should be in decending order starting at index 0 (3,2,1)
+                    if (!poles[0].isEmpty() || pole.getPole()[p].getSize() != d) {
                         return false;
                     }
+                    try {
+                        d--;
+                    }
+                    catch (ArrayIndexOutOfBoundsException ignored) {}
                 }
             }
         }

@@ -19,6 +19,7 @@ public class Draw extends EasyGraphics {
     @Override
     public void run() {
         drawBoard();
+        drawPoles();
         drawDisks();
     }
 
@@ -28,14 +29,18 @@ public class Draw extends EasyGraphics {
 
     private void drawBoard() {
 
+        //Resets the board after a move
+        setColor(255,255,255); //White
+        fillRectangle(10, 10, X-15, Y-15);
+
         final int X = this.X / 8;
 
         //Bottom line
-        drawLine(X, getBOTTOM(), this.X - X, getBOTTOM()); //TODO change size depending on number of poles, and disks
-
-        drawPoles();
+        setColor(0,0,0); //Black
+        drawLine(X, getBOTTOM(), this.X - X, getBOTTOM() ); //TODO change size depending on number of poles, and disks
     }
 
+    //Draws the poles
     private void drawPoles() {
 
         for (int x = DISTANCE; x <= DISTANCE * Main.POLES; x += DISTANCE) {
@@ -46,22 +51,21 @@ public class Draw extends EasyGraphics {
 
     //Draws the disks
     protected void drawDisks() { //TODO complete
-        //int diskSize = game.getPoles()[0].getPole()[0].getSize(); //Refers to the size of the disk in position 0, in pole 0
 
         int poleX = DISTANCE;
 
         for (int p = 0; p < game.getPoles().length; p++) {
 
             int posY = getBOTTOM();
+            if (game.getPoles()[p].getPole() != null) {
 
-            for (int size = game.getPoles()[p].getNr()-1; size >= 0; size--) { //TODO remove disk after moved
+                for (int d = 0; d < game.getPoles()[p].getNr(); d++) {
 
-                fillEllipse(poleX, posY, size*20+10, 10); //FIXME use correct diskSize
-                posY -= 20;
+                    fillEllipse(poleX, posY, game.getPoles()[p].getPole()[d].getSize() * 20 + 10, 10);
+                    posY -= 20; //Moves the drawing upwards
+                }
+                poleX += DISTANCE;
             }
-            poleX += DISTANCE;
         }
     }
-
-
 }
