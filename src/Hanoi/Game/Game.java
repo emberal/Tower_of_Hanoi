@@ -5,7 +5,7 @@ import Hanoi.Main;
 
 public class Game {
 
-    protected Pole[] poles = new Pole[Main.POLES];
+    private Pole[] poles = new Pole[Main.POLES];
 
     public Game(int DISKS) {
 
@@ -19,6 +19,20 @@ public class Game {
         }
     }
 
+    //Resets the disks back to starting position
+    public void resetBoard() {
+
+        for (int p = 1; p < Main.POLES; p++) {
+
+            if (!poles[p].isEmpty() ) {
+
+                for (int i = 0; i < Main.DISKS; i++) {
+                    poles[0].add(poles[p].removeDisk(i) );
+                }
+            }
+        }
+    }
+
     //Checks if the game is finished
     public boolean isFinished() {
 
@@ -26,17 +40,14 @@ public class Game {
 
             if (!pole.isEmpty() ) {
 
-                int d = Main.POLES;
+                int d = Main.DISKS;
                 for (int p = 0; p < pole.getNr(); p++) {
 
                     //Size of the disks should be in decending order starting at index 0 (3,2,1)
                     if (!poles[0].isEmpty() || pole.getPole()[p].getSize() != d) {
                         return false;
                     }
-                    try {
-                        d--;
-                    }
-                    catch (ArrayIndexOutOfBoundsException ignored) {}
+                    d--;
                 }
             }
         }
