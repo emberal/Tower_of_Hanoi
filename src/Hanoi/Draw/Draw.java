@@ -21,7 +21,7 @@ public class Draw extends EasyGraphics {
     }
 
     @Override
-    protected void run() { //TODO TEST
+    public void run() {
         drawBoard();
         drawPoles();
         drawDisks();
