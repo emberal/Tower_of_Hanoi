@@ -3,8 +3,12 @@ package Hanoi.Game;
 import Hanoi.Draw.Draw;
 import Hanoi.Main;
 import javax.swing.*;
+import java.io.*;
+import java.util.Scanner;
 
 public class Play extends Draw { //TODO Autoplay
+
+    public static final String statsFile = "assets/stats.txt";
 
     public Play(Game game) {
         super(game);
@@ -66,6 +70,8 @@ public class Play extends Draw { //TODO Autoplay
 
     private void stats() {
 
+        int record = readFile();
+
         boolean ok; char answer = ' ';
         do {
             ok = true;
@@ -73,7 +79,7 @@ public class Play extends Draw { //TODO Autoplay
                 answer = Character.toLowerCase(JOptionPane.showInputDialog("Board size: " + Main.POLES + '\n' +
                         "Number of disks: " + Main.DISKS + '\n' +
                         "Congratulations, you won!\nIt took you " + Main.turns + " turns" + '\n' +
-                        "The previous record was: " + null + '\n' +
+                        "The previous record was: " + record + '\n' +
                         "Would you like to play again? (Y/N)").charAt(0) );
             }
             catch (StringIndexOutOfBoundsException e) {
@@ -95,5 +101,62 @@ public class Play extends Draw { //TODO Autoplay
             game.resetBoard();
             new Play(game);
         }
+    }
+
+    private int readFile() {
+
+        File stats = new File(statsFile);
+        int[] records = new int[11];
+        int record = 0;
+
+        try (Scanner scanner = new Scanner(stats) ) { //TODO save the best value, that's not 0
+            //TODO read file, save to "records"
+            for (int i = 2; i < records.length; i++) {
+
+                while (scanner.hasNextInt()) {
+                    int nr = scanner.nextInt(); //Skips over nr of disks
+
+                    if (scanner.nextInt() < records[i] && scanner.nextInt() != 0) { //FIXME WRONG!
+                        records[i] = scanner.nextInt();
+                    }
+
+                    if (i == Main.DISKS) {
+                        record = records[i];
+                    }
+                }
+            }
+            if (!writeToFile(records) ) {
+                System.out.println("Can't write to file");
+            }
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("File not found!");
+        }
+        return record;
+    }
+
+    private boolean writeToFile(int[] records) {
+
+        try (PrintWriter writer = new PrintWriter(new FileWriter(statsFile, false) ) ) {
+
+            for (int i = 2; i <= 10; i++) {
+
+                writer.print("Number of disks: " + i + "\t\tPrevious record was: ");
+
+                if (i == Main.DISKS) {
+                    writer.print(Main.turns);
+                }
+                else {
+                    writer.print(records[i]);
+                }
+                writer.println(" turns.");
+            }
+
+        }
+        catch (IOException e) {
+            System.out.println("File not found!");
+            return false;
+        }
+        return true;
     }
 }
