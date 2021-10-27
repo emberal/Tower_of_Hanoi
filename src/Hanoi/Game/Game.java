@@ -31,6 +31,7 @@ public class Game {
                 }
             }
         }
+        Main.turns = 0;
     }
 
     //Checks if the game is finished
