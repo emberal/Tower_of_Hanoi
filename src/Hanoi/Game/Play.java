@@ -72,6 +72,11 @@ public class Play extends Draw { //TODO Autoplay
 
         int record = readFile();
 
+        String recordLine = "";
+        if (record > 0) {
+            recordLine = ("The previous record was: " + record + '\n');
+        }
+
         boolean ok; char answer = ' ';
         do {
             ok = true;
@@ -79,7 +84,7 @@ public class Play extends Draw { //TODO Autoplay
                 answer = Character.toLowerCase(JOptionPane.showInputDialog("Board size: " + Main.POLES + '\n' +
                         "Number of disks: " + Main.DISKS + '\n' +
                         "Congratulations, you won!\nIt took you " + Main.turns + " turns" + '\n' +
-                        "The previous record was: " + record + '\n' +
+                        recordLine +
                         "Would you like to play again? (Y/N)").charAt(0) );
             }
             catch (StringIndexOutOfBoundsException e) {
