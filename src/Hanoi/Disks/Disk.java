@@ -7,20 +7,17 @@ public class Disk {
 
     private static int nr = Main.DISKS;
 
-    private int size, xPos; //TODO
+    private int size, xPos, yPos; //TODO
     private Position position;
-
-    private final Position polePos;
 
     public Disk(Position position) {
         this.size = nr; nr--;
         this.position = position;
-        polePos = position;
     }
 
     @Override
     public String toString() {
-        return  polePos + "{" +
+        return  position + "{" +
                 "size=" + size +
                 ", position=" + position +
                 '}';
@@ -36,6 +33,14 @@ public class Disk {
 
     public void setxPos(int xPos) {
         this.xPos = xPos;
+    }
+
+    public int getyPos() {
+        return yPos;
+    }
+
+    public void setyPos(int yPos) {
+        this.yPos = yPos;
     }
 
     public int getSize() {

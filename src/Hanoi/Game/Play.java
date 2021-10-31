@@ -103,30 +103,35 @@ public class Play extends Draw { //TODO Autoplay
         }
     }
 
-    private int readFile() {
+    private int readFile() { //TODO Test
 
         File stats = new File(statsFile);
         int[] records = new int[11]; //Max disks to play with + 2
         int record = 0;
 
-        try (Scanner scanner = new Scanner(stats) ) { //TODO save the best value, that's not 0
+        try (Scanner scanner = new Scanner(stats) ) {
 
-            String title = scanner.nextLine(); //Skips over the first line
-            for (int diskNr = 2; diskNr < records.length; diskNr++) {
+            scanner.nextLine(); //Skips over the first line
 
-                while (scanner.hasNextInt() ) { //FIXME doesn't write values past 2 disks
-                    int nr = scanner.nextInt(); //Skips over nr of disks, for each line
-                    String divider = scanner.next();
-                    records[diskNr] = scanner.nextInt();
+            int diskNr = 2;
+            while (scanner.hasNextInt() ) {
 
-                    if (diskNr == Main.DISKS) {
+                { //Skips over first integer and divider, for each line
+                    scanner.nextInt();
+                    scanner.next();
+                }
 
-                        if (Main.turns < records[diskNr] || records[diskNr] == 0) {
-                            records[diskNr] = Main.turns;
-                        }
-                        record = records[diskNr];
+                records[diskNr] = scanner.nextInt(); //Saves the old records
+                scanner.nextLine();
+
+                if (diskNr == Main.DISKS) {
+
+                    record = records[diskNr];
+                    if (Main.turns < records[diskNr] || records[diskNr] == 0) {
+                        records[diskNr] = Main.turns;
                     }
                 }
+                diskNr++;
             }
             if (!writeToFile(records) ) {
                 System.out.println("Can't write to file");
@@ -139,7 +144,7 @@ public class Play extends Draw { //TODO Autoplay
         return record;
     }
 
-    private boolean writeToFile(int[] records) {
+    private boolean writeToFile(int[] records) { //TODO Test
 
         try (PrintWriter writer = new PrintWriter(new FileWriter(statsFile, false) ) ) {
 
