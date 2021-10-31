@@ -11,7 +11,7 @@ public class Play extends Draw { //TODO Autoplay
     public static final String statsFile = "assets/stats.txt";
 
     public Play(Game game) {
-        super(game);
+        super(game); //Draws the board
         startGame();
     }
 
@@ -42,7 +42,7 @@ public class Play extends Draw { //TODO Autoplay
         int posFrom, posTo;
 
         do {
-            posFrom = Integer.parseInt(getText("Choose pole (0 - " + (Main.POLES - 1) + ")") );
+            posFrom = Integer.parseInt(getText("Choose pole (1 - " + (Main.POLES) + ")") ) - 1;
 
             if (game.getPoles()[posFrom].isEmpty() ) {
                 JOptionPane.showMessageDialog(null, "No disks in pole, try a different one!");
@@ -50,10 +50,13 @@ public class Play extends Draw { //TODO Autoplay
             else {
                 System.out.println(game.getPoles()[posFrom].getPosition() + " selected");
 
-                posTo = Integer.parseInt(getText("Choose pole (0 - " + (Main.POLES - 1) + ")") );
+                posTo = Integer.parseInt(getText("Choose pole (1 - " + (Main.POLES) + ")")) - 1;
 
                 if (posFrom == posTo) {
                     JOptionPane.showMessageDialog(null, "You can't choose the same pole");
+                }
+                else if (!game.getPoles()[posFrom].isLegal(game.getPoles()[posTo]) ) {
+                    JOptionPane.showMessageDialog(null, "Not a Legal move!");
                 }
                 else { //If move is successful
                     game.getPoles()[posFrom].moveTo(game.getPoles()[posTo]);
@@ -104,7 +107,7 @@ public class Play extends Draw { //TODO Autoplay
 
         if (answer == 'y') {
             game.resetBoard();
-            new Play(game);
+            Main.setUp();
         }
     }
 
@@ -153,11 +156,11 @@ public class Play extends Draw { //TODO Autoplay
 
         try (PrintWriter writer = new PrintWriter(new FileWriter(statsFile, false) ) ) {
 
-            writer.println("Number of disks:\t|\tPrevious record was");
+            writer.println("Number of disks\t|\tPrevious record was");
 
             for (int i = 2; i < records.length; i++) {
 
-                writer.printf("%16s %4s %10s %n", i, '|', records[i] + " turns.");
+                writer.printf("%15s %1s %10s %n", i, '|', records[i] + " turns.");
             }
         }
         catch (IOException e) {

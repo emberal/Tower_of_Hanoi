@@ -53,12 +53,11 @@ public class Draw extends EasyGraphics {
     //Draws the poles
     private void drawPoles() {
 
-        int[] poles = new int[Main.POLES];
-
         int i = 0;
         for (int x = DISTANCE; x <= DISTANCE * Main.POLES; x += DISTANCE) {
-            poles[i] = drawLine(x, getBOTTOM(), x, getBOTTOM() / 2); //TODO Give each pole a name (1, 2, 3...)
+            drawLine(x, getBOTTOM(), x, getBOTTOM() / 2);
             i++;
+            drawString(Integer.toString(i), x - 3, getBOTTOM() + 30 );
         } //TODO write contents of poles on the screen
     }
 
@@ -74,7 +73,7 @@ public class Draw extends EasyGraphics {
 
                 for (int d = 0; d < game.getPoles()[p].getNr(); d++) {
 
-                    disks[d] = fillEllipse(poleX, posY, game.getPoles()[p].getPole()[d].getSize() * 20 + 10, 10);
+                    disks[d] = fillEllipse(poleX, posY,(int) Math.pow(game.getPoles()[p].getPole()[d].getSize(), 2) * 2 + 10, 10);
                     posY -= 20; //Moves the drawing upwards
                 }
                 poleX += DISTANCE;

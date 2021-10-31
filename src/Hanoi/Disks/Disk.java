@@ -5,13 +5,11 @@ import Hanoi.Main;
 
 public class Disk {
 
-    private static int nr = Main.DISKS;
-
     private int size, xPos, yPos; //TODO
     private Position position;
 
-    public Disk(Position position) {
-        this.size = nr; nr--;
+    public Disk(Position position, int size) {
+        this.size = size;
         this.position = position;
     }
 
@@ -21,10 +19,6 @@ public class Disk {
                 "size=" + size +
                 ", position=" + position +
                 '}';
-    }
-
-    public static int getNr() {
-        return nr;
     }
 
     public int getxPos() {

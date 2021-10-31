@@ -21,7 +21,7 @@ public class Pole extends Draw {
 
         for (; nr < DISKS; nr++) {
 
-            pole[nr] = new Disk(position);
+            pole[nr] = new Disk(position, DISKS-nr); //Size decreases by 1 for each iteration
 
         }
     }

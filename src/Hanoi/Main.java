@@ -24,7 +24,13 @@ public class Main extends EasyGraphics { //TODO get size from player input
 
         System.out.println("Starting game...");
 
+        setUp();
+    }
+
+    public static void setUp() {
+
         boolean ok;
+
         do {
             ok = true;
             try {
