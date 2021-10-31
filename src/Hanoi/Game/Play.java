@@ -106,22 +106,25 @@ public class Play extends Draw { //TODO Autoplay
     private int readFile() {
 
         File stats = new File(statsFile);
-        int[] records = new int[11];
+        int[] records = new int[11]; //Max disks to play with + 2
         int record = 0;
 
         try (Scanner scanner = new Scanner(stats) ) { //TODO save the best value, that's not 0
-            //TODO read file, save to "records"
-            for (int i = 2; i < records.length; i++) {
 
-                while (scanner.hasNextInt()) {
-                    int nr = scanner.nextInt(); //Skips over nr of disks
+            String title = scanner.nextLine(); //Skips over the first line
+            for (int diskNr = 2; diskNr < records.length; diskNr++) {
 
-                    if (scanner.nextInt() < records[i] && scanner.nextInt() != 0) { //FIXME WRONG!
-                        records[i] = scanner.nextInt();
-                    }
+                while (scanner.hasNextInt() ) { //FIXME doesn't write values past 2 disks
+                    int nr = scanner.nextInt(); //Skips over nr of disks, for each line
+                    String divider = scanner.next();
+                    records[diskNr] = scanner.nextInt();
 
-                    if (i == Main.DISKS) {
-                        record = records[i];
+                    if (diskNr == Main.DISKS) {
+
+                        if (Main.turns < records[diskNr] || records[diskNr] == 0) {
+                            records[diskNr] = Main.turns;
+                        }
+                        record = records[diskNr];
                     }
                 }
             }
@@ -131,6 +134,7 @@ public class Play extends Draw { //TODO Autoplay
         }
         catch (FileNotFoundException e) {
             System.out.println("File not found!");
+            writeToFile(records);
         }
         return record;
     }
@@ -139,19 +143,12 @@ public class Play extends Draw { //TODO Autoplay
 
         try (PrintWriter writer = new PrintWriter(new FileWriter(statsFile, false) ) ) {
 
-            for (int i = 2; i <= 10; i++) {
+            writer.println("Number of disks:\t|\tPrevious record was");
 
-                writer.print("Number of disks: " + i + "\t\tPrevious record was: ");
+            for (int i = 2; i < records.length; i++) {
 
-                if (i == Main.DISKS) {
-                    writer.print(Main.turns);
-                }
-                else {
-                    writer.print(records[i]);
-                }
-                writer.println(" turns.");
+                writer.printf("%16s %4s %10s %n", i, '|', records[i] + " turns.");
             }
-
         }
         catch (IOException e) {
             System.out.println("File not found!");
