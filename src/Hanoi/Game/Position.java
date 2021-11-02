@@ -13,4 +13,7 @@ public enum Position { //TODO
         this.X_POS = X_POS;
     }
 
+    public int getX_POS() {
+        return X_POS;
+    }
 }
