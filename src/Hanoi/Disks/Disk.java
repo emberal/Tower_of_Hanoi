@@ -6,7 +6,7 @@ import Hanoi.Game.Position;
 public class Disk {
 
     private int size, xPos, yPos; //TODO
-    private Colour colour; //TODO
+    private Colour colour;
     private Position position;
 
     public Disk(Position position, int size) {
@@ -17,7 +17,7 @@ public class Disk {
 
     @Override
     public String toString() {
-        return "Disk{" +
+        return  position + "{" +
                 "size=" + size +
                 /*", xPos=" + xPos +
                 ", yPos=" + yPos +*/
