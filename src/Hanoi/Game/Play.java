@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Play extends Draw { //TODO Autoplay
 
-    public static final String statsFile = "assets/stats.txt";
+    public static final String statsFile = "assets/stats.dat";
 
     public Play(Game game) {
         super(game); //Draws the board
@@ -141,13 +141,14 @@ public class Play extends Draw { //TODO Autoplay
                 }
                 diskNr++;
             }
-            if (!writeToFile(records) ) {
-                System.out.println("Can't write to file");
-            }
+            writeToFile(records);
         }
         catch (FileNotFoundException e) {
-            System.out.println("File not found!");
-            writeToFile(records);
+            System.out.println("File not found! Trying to create new file: " + statsFile);
+
+            if (writeToFile(records) ) {
+                readFile();
+            }
         }
         return record;
     }
@@ -156,15 +157,15 @@ public class Play extends Draw { //TODO Autoplay
 
         try (PrintWriter writer = new PrintWriter(new FileWriter(statsFile, false) ) ) {
 
-            writer.println("Number of disks\t|\tPrevious record was");
+            writer.printf("%15s %2s %-10s %n", "Number of disks", '|', "Previous record was");
 
             for (int i = 2; i < records.length; i++) {
 
-                writer.printf("%15s %1s %10s %n", i, '|', records[i] + " turns.");
+                writer.printf("%15s %2s %-5s %1s %n", i, '|', records[i], "turns.");
             }
         }
         catch (IOException e) {
-            System.out.println("File not found!");
+            System.out.println("File could not be created!");
             return false;
         }
         return true;
