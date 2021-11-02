@@ -1,6 +1,7 @@
 package Hanoi.Draw;
 
 import Hanoi.Game.Game;
+import Hanoi.Game.Position;
 import Hanoi.Main;
 import easygraphics.EasyGraphics;
 
@@ -54,7 +55,7 @@ public class Draw extends EasyGraphics {
     private void drawPoles() {
 
         int i = 0;
-        for (int x = DISTANCE; x <= DISTANCE * Main.POLES; x += DISTANCE) {
+        for (int x = Position.LEFT.getX_POS(); x <= DISTANCE * Main.POLES; x += DISTANCE) {
             drawLine(x, getBOTTOM(), x, getBOTTOM() / 2);
             i++;
             drawString(Integer.toString(i), x - 3, getBOTTOM() + 30 );
