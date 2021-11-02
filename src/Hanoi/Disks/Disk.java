@@ -1,24 +1,43 @@
 package Hanoi.Disks;
 
+import Hanoi.Draw.Colour;
 import Hanoi.Game.Position;
-import Hanoi.Main;
 
 public class Disk {
 
     private int size, xPos, yPos; //TODO
+    private Colour colour; //TODO
     private Position position;
 
     public Disk(Position position, int size) {
         this.size = size;
         this.position = position;
+        this.colour = setColour();
     }
 
     @Override
     public String toString() {
-        return  position + "{" +
+        return "Disk{" +
                 "size=" + size +
+                /*", xPos=" + xPos +
+                ", yPos=" + yPos +*/
+                ", colour=" + colour +
                 ", position=" + position +
                 '}';
+    }
+
+    private Colour setColour() {
+
+        for (Colour c : Colour.values() ) {
+            if (size - 1 == c.ordinal() ) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public Colour getColour() {
+        return colour;
     }
 
     public int getxPos() {

@@ -71,7 +71,7 @@ public class Play extends Draw { //TODO Autoplay
         stats();
     }
 
-    private void stats() {
+    private void stats() { //TODO Timer
 
         int record = readFile();
 
