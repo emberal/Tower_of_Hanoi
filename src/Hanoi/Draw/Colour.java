@@ -12,7 +12,7 @@ public enum Colour { //Defines the different colours of the disks
     ORANGE(255, 128, 0),
     LIGHT_BLUE(173, 216, 230);
 
-    final int R, G, B;
+    private final int R, G, B;
 
     Colour(int R, int G, int B) {
         this.R = R;

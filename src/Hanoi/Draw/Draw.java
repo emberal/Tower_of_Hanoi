@@ -77,9 +77,9 @@ public class Draw extends EasyGraphics {
                     int[] c = game.getPoles()[p].getPole()[d].getColour().getRGB();
                     setColor(c[0],c[1],c[2]);
 
-                    disks[d] = fillEllipse(poleX, posY,(int) Math.pow(game.getPoles()[p].getPole()[d].getSize(), 2) * 2 + 10, 5);
+                    disks[d] = fillEllipse(poleX, posY,game.getPoles()[p].getPole()[d].getSize() * 11 + 10, 5);
                     setColor(0,0,0); //Black
-                    posY -= 10; //Moves the drawing upwards
+                    posY -= 8; //Moves the drawing upwards
                 }
                 poleX += DISTANCE;
             }

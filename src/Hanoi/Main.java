@@ -52,8 +52,8 @@ public class Main extends EasyGraphics { //TODO get size from player input
             }
         } while (!ok);
 
-        Game game = new Game(DISKS);
+        Game game = new Game(DISKS); //Creates everything
         game.printAllArrays();
-        new Play(game);
+        new Play(game); //Starts the game
     }
 }
