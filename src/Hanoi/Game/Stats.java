@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.io.*;
 import java.util.Scanner;
 
-public class Stats {
+public abstract class Stats {
 
     public static long start;
     private static final String statsFile = "assets/stats.dat";
@@ -118,7 +118,7 @@ public class Stats {
         return record;
     }
 
-    private static boolean writeToFile(int[] records) { //TODO Test
+    public static boolean writeToFile(int[] records) { //TODO Test
 
         try (PrintWriter writer = new PrintWriter(new FileWriter(statsFile, false) ) ) {
 
@@ -126,7 +126,7 @@ public class Stats {
 
             for (int i = 2; i < records.length; i++) {
 
-                writer.printf("%15s %2s %-5s %1s %n", i, '|', records[i], "turns.");
+                writer.printf("%15s %2s %-5s %2s %1s %n", i, '|', records[i], "turns.", '|');
             }
         }
         catch (IOException e) {
