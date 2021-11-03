@@ -2,6 +2,7 @@ package Hanoi;
 
 import Hanoi.Game.Game;
 import Hanoi.Game.Play;
+import Hanoi.Game.Stats;
 import easygraphics.EasyGraphics;
 
 import javax.swing.*;
@@ -39,10 +40,15 @@ public class Main extends EasyGraphics { //TODO get size from player input
             catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, numberFormatExc);
                 ok = false;
+
             }
             if (ok) {
                 if (DISKS < 2) {
                     JOptionPane.showMessageDialog(null, "You need a minimum of 2 disks to play the game.");
+                    ok = false;
+                }
+                else if (DISKS == 420) { //Reset file
+                    Stats.writeToFile(new int[11]);
                     ok = false;
                 }
                 else if (DISKS > 10) {
