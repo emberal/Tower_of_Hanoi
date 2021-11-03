@@ -17,12 +17,15 @@ public abstract class Stats {
         System.out.println(timeMs + "ms");
 
         String record = readFile(timeMs);
+        String recordLine = "";
 
         //Prints only if the player has played at least 1 round
-        String recordLine = "";
-        if (record.charAt(0) != '0') {
-            recordLine = ("The previous record was: " + record + ".\n");
+        try {
+            if (record.charAt(0) != '0') {
+                recordLine = ("The previous record was: " + record + ".\n");
+            }
         }
+        catch (StringIndexOutOfBoundsException ignored) {}
 
         boolean ok; char answer = ' ';
         do {
@@ -79,7 +82,10 @@ public abstract class Stats {
 
     private static String readFile(long timeMs) { //TODO Test
 
+        new File("assets").mkdir();
+
         File stats = new File(statsFile);
+
         int[] records = new int[Main.DISKS_MAX+1]; //Max disks to play with + 2
         long[] times = new long[Main.DISKS_MAX+1];
         String record = "";
