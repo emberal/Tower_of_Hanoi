@@ -82,7 +82,13 @@ public abstract class Stats {
 
     private static String readFile(long timeMs) { //TODO Test
 
-        new File("assets").mkdir();
+        //Creates folder if it doesn't exist
+        File assets = new File("assets");
+        if (!assets.exists() ) {
+            if (assets.mkdir() ) {
+                System.out.println("Folder created!");
+            }
+        }
 
         File stats = new File(statsFile);
 
