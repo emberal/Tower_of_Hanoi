@@ -1,33 +1,43 @@
 package Hanoi.Disks;
 
+import Hanoi.Draw.Colour;
 import Hanoi.Game.Position;
-import Hanoi.Main;
 
 public class Disk {
 
-    private static int nr = Main.DISKS;
-
-    private int size, xPos; //TODO
+    private int size, xPos, yPos; //TODO
+    private Colour colour;
     private Position position;
 
-    private final Position polePos;
-
-    public Disk(Position position) {
-        this.size = nr; nr--;
+    public Disk(Position position, int size) {
+        this.size = size;
         this.position = position;
-        polePos = position;
+        this.colour = setColour();
     }
 
     @Override
     public String toString() {
-        return  polePos + "{" +
+        return  position + "{" +
                 "size=" + size +
+                /*", xPos=" + xPos +
+                ", yPos=" + yPos +*/
+                ", colour=" + colour +
                 ", position=" + position +
                 '}';
     }
 
-    public static int getNr() {
-        return nr;
+    private Colour setColour() {
+
+        for (Colour c : Colour.values() ) {
+            if (size - 1 == c.ordinal() ) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public Colour getColour() {
+        return colour;
     }
 
     public int getxPos() {
@@ -36,6 +46,14 @@ public class Disk {
 
     public void setxPos(int xPos) {
         this.xPos = xPos;
+    }
+
+    public int getyPos() {
+        return yPos;
+    }
+
+    public void setyPos(int yPos) {
+        this.yPos = yPos;
     }
 
     public int getSize() {

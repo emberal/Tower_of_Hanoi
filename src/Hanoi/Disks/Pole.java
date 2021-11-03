@@ -16,12 +16,12 @@ public class Pole extends Draw {
     //Constructor
     public Pole(int DISKS, Position position) {
 
-        pole = new Disk[Main.DISKS];
+        pole = new Disk[Main.disks];
         this.position = position;
 
         for (; nr < DISKS; nr++) {
 
-            pole[nr] = new Disk(position);
+            pole[nr] = new Disk(position, DISKS-nr); //Size decreases by 1 for each iteration
 
         }
     }
@@ -59,7 +59,7 @@ public class Pole extends Draw {
     //Adds a disk to array
     public boolean add(Disk disk) {
 
-        if (nr < Main.DISKS) {
+        if (nr < Main.disks) {
             pole[nr] = disk;
             nr++;
             return true;

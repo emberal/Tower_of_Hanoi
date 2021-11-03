@@ -41,9 +41,9 @@ class PoleTest {
 
         setUp();
 
-        Assertions.assertFalse(pole1.add(new Disk(Position.RIGHT)));
-        Assertions.assertTrue(pole2.add(new Disk(Position.RIGHT)));
-        Assertions.assertTrue(pole3.add(new Disk(Position.RIGHT)));
+        Assertions.assertFalse(pole1.add(new Disk(Position.RIGHT, 2)));
+        Assertions.assertTrue(pole2.add(new Disk(Position.RIGHT, 1)));
+        Assertions.assertTrue(pole3.add(new Disk(Position.RIGHT, 0)));
 
         Assertions.assertEquals(3, pole1.getNr());
         Assertions.assertEquals(1, pole2.getNr());

@@ -1,13 +1,14 @@
 package Hanoi.Draw;
 
 import Hanoi.Game.Game;
+import Hanoi.Game.Position;
 import Hanoi.Main;
 import easygraphics.EasyGraphics;
 
 public class Draw extends EasyGraphics {
 
     private final int X = 800, Y = 400, DISTANCE = 200;
-    protected int[] disks = new int[Main.DISKS];
+    protected int[] disks = new int[Main.disks];
 
     protected Game game;
 
@@ -53,13 +54,12 @@ public class Draw extends EasyGraphics {
     //Draws the poles
     private void drawPoles() {
 
-        int[] poles = new int[Main.POLES];
-
         int i = 0;
-        for (int x = DISTANCE; x <= DISTANCE * Main.POLES; x += DISTANCE) {
-            poles[i] = drawLine(x, getBOTTOM(), x, getBOTTOM() / 2); //TODO Give each pole a name (1, 2, 3...)
+        for (int x = Position.LEFT.getX_POS(); x <= DISTANCE * Main.POLES; x += DISTANCE) {
+            drawLine(x, getBOTTOM(), x, getBOTTOM() / 2);
             i++;
-        } //TODO write contents of poles on the screen
+            drawString(Integer.toString(i), x - 3, getBOTTOM() + 30 );
+        }
     }
 
     //Draws the disks
@@ -74,11 +74,16 @@ public class Draw extends EasyGraphics {
 
                 for (int d = 0; d < game.getPoles()[p].getNr(); d++) {
 
-                    disks[d] = fillEllipse(poleX, posY, game.getPoles()[p].getPole()[d].getSize() * 20 + 10, 10);
-                    posY -= 20; //Moves the drawing upwards
+                    //Gets the colour from the disk
+                    int[] c = game.getPoles()[p].getPole()[d].getColour().getRGB();
+                    setColor(c[0],c[1],c[2]);
+
+                    disks[d] = fillEllipse(poleX, posY,game.getPoles()[p].getPole()[d].getSize() * 11 + 10, 5);
+                    posY -= 8; //Moves the drawing upwards
                 }
                 poleX += DISTANCE;
             }
         }
+        setColor(0,0,0); //Black
     }
 }
