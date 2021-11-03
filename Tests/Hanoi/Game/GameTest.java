@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 class GameTest { //TODO tests
 
-    Game game = new Game(Main.DISKS);
+    Game game = new Game(Main.disks);
 
     @Test
     void constructor() {

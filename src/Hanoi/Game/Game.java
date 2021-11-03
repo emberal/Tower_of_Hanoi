@@ -20,13 +20,14 @@ public class Game {
     }
 
     //Resets the disks back to starting position
+    @Deprecated
     public void resetBoard() {
 
         for (int p = 1; p < Main.POLES; p++) {
 
             if (!poles[p].isEmpty() ) {
 
-                for (int i = 0; i < Main.DISKS; i++) {
+                for (int i = 0; i < Main.disks; i++) {
                     poles[0].add(poles[p].removeDisk(i) );
                 }
             }
@@ -41,7 +42,7 @@ public class Game {
 
             if (!pole.isEmpty() ) {
 
-                int d = Main.DISKS;
+                int d = Main.disks;
                 for (int p = 0; p < pole.getNr(); p++) {
 
                     //Size of the disks should be in decending order starting at index 0 (3,2,1)

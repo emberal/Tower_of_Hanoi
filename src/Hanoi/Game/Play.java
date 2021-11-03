@@ -15,7 +15,7 @@ public class Play extends Draw { //TODO Autoplay
     private void startGame() {
 
         boolean ok;
-        Stats.start = System.currentTimeMillis();
+        Stats.start = System.currentTimeMillis(); //Starts the timer
 
         do { //Choose Pole
             ok = true;
@@ -65,6 +65,6 @@ public class Play extends Draw { //TODO Autoplay
 
         } while (!game.isFinished() );
 
-        Stats.stats(game);
+        Stats.stats();
     }
 }

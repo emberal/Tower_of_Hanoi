@@ -8,7 +8,7 @@ import easygraphics.EasyGraphics;
 public class Draw extends EasyGraphics {
 
     private final int X = 800, Y = 400, DISTANCE = 200;
-    protected int[] disks = new int[Main.DISKS];
+    protected int[] disks = new int[Main.disks];
 
     protected Game game;
 
@@ -59,7 +59,7 @@ public class Draw extends EasyGraphics {
             drawLine(x, getBOTTOM(), x, getBOTTOM() / 2);
             i++;
             drawString(Integer.toString(i), x - 3, getBOTTOM() + 30 );
-        } //TODO write contents of poles on the screen
+        }
     }
 
     //Draws the disks
