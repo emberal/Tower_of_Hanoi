@@ -38,7 +38,7 @@ public abstract class Stats {
                         "Would you like to play again? (Y/N)").charAt(0) );
             }
             catch (StringIndexOutOfBoundsException e) {
-                JOptionPane.showMessageDialog(null,"Input can't be empty");
+                JOptionPane.showMessageDialog(null, Main.stringOutOfBounds);
                 ok = false;
             }
             catch (NullPointerException ignored) {}

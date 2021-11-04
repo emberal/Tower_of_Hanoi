@@ -6,6 +6,7 @@ import Hanoi.Game.Stats;
 import easygraphics.EasyGraphics;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Main extends EasyGraphics { //TODO get size from player input
 
@@ -16,6 +17,7 @@ public class Main extends EasyGraphics { //TODO get size from player input
 
     public static final String numberFormatExc = "Invalid input, must be an integer number";
     public static final String arrayOutOfBounds = "Invalid input, out of bounds";
+    public static final String stringOutOfBounds = "Input can't be empty";
 
     public static void main(String[] args) {
         launch(args);
@@ -31,17 +33,21 @@ public class Main extends EasyGraphics { //TODO get size from player input
 
     public static void setUp() {
 
-        boolean ok;
+        boolean ok, autoplay = false;
 
         do {
             ok = true;
             try {
-                disks = Integer.parseInt(JOptionPane.showInputDialog("How many disks do you want to play with? (2-10)"));
+                disks = Integer.parseInt(JOptionPane.showInputDialog("How many disks do you want to play with? (2-10)") );
+                autoplay = Character.toLowerCase(JOptionPane.showInputDialog("Would you like autocomplete? (Y/N)").charAt(0)) == 'y';
             }
             catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, numberFormatExc);
                 ok = false;
-
+            }
+            catch (StringIndexOutOfBoundsException e) { //TODO move to it's own try-catch?
+                JOptionPane.showMessageDialog(null, stringOutOfBounds);
+                ok = false;
             }
             if (ok) {
                 if (disks < 2) {
@@ -61,6 +67,6 @@ public class Main extends EasyGraphics { //TODO get size from player input
 
         Game game = new Game(disks); //Creates everything
         game.printAllArrays();
-        new Play(game); //Starts the game
+        new Play(game, autoplay); //Starts the game
     }
 }

@@ -1,14 +1,20 @@
 package Hanoi.Game;
 
+import Hanoi.Disks.Pole;
 import Hanoi.Draw.Draw;
 import Hanoi.Main;
 import javax.swing.*;
 
-public class Play extends Draw { //TODO Autoplay
+public class Play extends Draw {
 
-    public Play(Game game) {
+    public Play(Game game, boolean autoplay) {
         super(game); //Draws the board
-        startGame();
+        if (!autoplay) { //TODO Autoplay
+            startGame();
+        }
+        else {
+            autoplay();
+        }
     }
 
     //Starts the game
@@ -65,6 +71,34 @@ public class Play extends Draw { //TODO Autoplay
 
         } while (!game.isFinished() );
 
+        Stats.stats();
+    }
+
+    /*
+    If the number of disks with a consecutive size on a pole are an odd number,
+     set the top disk on the disk that's not on the starting pole
+    If the number of disks with a consecutive size on a pole are an even number,
+     set the top disk on the disk that's on the starting pole
+        Then every other after that until the pole is empty, then do the next pole
+     */
+    private void autoplay() { //TODO
+
+        Pole[] pole = game.getPoles();
+
+        //First move
+        pole[0].moveTo(pole[1]);
+        pole[0].moveTo(pole[2]);
+        pole[1].moveTo(pole[2]);
+
+        while (!game.isFinished() ) {
+
+            //pole[0].moveTo(pole[1]);
+
+
+            run();
+            game.printAllArrays();
+
+        }
         Stats.stats();
     }
 }
