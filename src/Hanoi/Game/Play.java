@@ -87,12 +87,55 @@ public class Play extends Draw {
 
         //First move
         pole[0].moveTo(pole[1]);
+        pause(10);
         pole[0].moveTo(pole[2]);
+        pause(10);
         pole[1].moveTo(pole[2]);
 
         while (!game.isFinished() ) {
 
-            //pole[0].moveTo(pole[1]);
+            pole[0].moveTo(pole[1]);
+
+            //TODO Not the start of the game, missing some code before and after this!
+            Pole least = null, most = null;
+            int counter = 0;
+
+            for (Pole p : pole) {
+                if (p.getNr() == 0) { //Locates the empty pole
+                    least = p; //FIXME, never TRUE
+                }
+                //Locates the pole that's not empty, and does not contain the largest disk
+                else if (p.getNr() > 0 && p.getPole()[0].getSize() != Main.disks) {
+                    most = p;
+                }
+            }
+            int r = 0; //TODO find correct pole
+            //Checks each disk if the size difference of two disks is more than one, counts how many disks before the gap
+            //For example, a pole might containt the following sizes: 1, 2, 3, 4, 6, 7, 8;
+            // In this case it should count 4, and only move the top 4 first, then 6 to the empty pole
+            do { //FIXME shouldn't count all poles, only the one with disks to be moved
+                for (int k = 0; k < pole[r].getNr()-1; k++) {
+                    if (pole[r].getPole()[k].getSize() - pole[r].getPole()[k + 1].getSize() > 1) { //TODO Check
+
+                        if (counter % 2 == 0) { //If even number place first disk on the pole that is empty
+                            pole[r].moveTo(least);
+                            pole[r].moveTo(most);
+                            least.moveTo(most); //FIXME Try-catch or something
+                        }
+                        else { //If odd number place first disk on the pole that's not empty
+                            pole[r].moveTo(most);
+                            pole[r].moveTo(least);
+                            most.moveTo(least);
+                        }
+                    }
+                    else {
+                        counter++;
+                    }
+                }
+                if (!pole[r].isLegal(least) || !pole[r].isLegal(most) ) { //TODO Do not move disks back to previous position
+                    r++;
+                }
+            } while (pole[r].isLegal(most) ); //FIXME Wrong!
 
 
             run();
