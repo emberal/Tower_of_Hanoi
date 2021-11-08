@@ -7,8 +7,8 @@ import easygraphics.EasyGraphics;
 
 public class Draw extends EasyGraphics {
 
-    private final int X = 800, Y = 400, DISTANCE = 200;
-    protected int[] disks = new int[Main.disks];
+    private final int X = 800, Y = 400;
+    private int[] disks = new int[Main.disks];
 
     protected Game game;
 
@@ -55,19 +55,18 @@ public class Draw extends EasyGraphics {
     private void drawPoles() {
 
         int i = 0;
-        for (int x = Position.LEFT.getX_POS(); x <= DISTANCE * Main.POLES; x += DISTANCE) {
-            drawLine(x, getBOTTOM(), x, getBOTTOM() / 2);
+        for (Position pos : Position.values() ) {
+            drawLine(pos.getX_POS(), getBOTTOM(), pos.getX_POS(), getBOTTOM() / 2);
             i++;
-            drawString(Integer.toString(i), x - 3, getBOTTOM() + 30 );
+            drawString(Integer.toString(i), pos.getX_POS() - 3, getBOTTOM() + 30 );
         }
     }
 
     //Draws the disks
     private void drawDisks() { //TODO change to move methods TODO TEST
 
-        int poleX = DISTANCE;
-
-        for (int p = 0; p < game.getPoles().length; p++) {
+        int p = 0;
+        for (Position pos : Position.values() ) {
 
             int posY = getBOTTOM();
             if (game.getPoles()[p].getPole() != null) {
@@ -75,15 +74,14 @@ public class Draw extends EasyGraphics {
                 for (int d = 0; d < game.getPoles()[p].getNr(); d++) {
 
                     //Gets the colour from the disk
-                    int[] c = game.getPoles()[p].getPole()[d].getColour().getRGB();
-                    setColor(c[0],c[1],c[2]);
+                    final int[] RGB = game.getPoles()[p].getPole()[d].getColour().getRGB();
+                    setColor(RGB[0],RGB[1],RGB[2]);
 
-                    disks[d] = fillEllipse(poleX, posY,game.getPoles()[p].getPole()[d].getSize() * 11 + 10, 5);
+                    disks[d] = fillEllipse(pos.getX_POS(), posY,game.getPoles()[p].getPole()[d].getSize() * 11 + 10, 5);
                     posY -= 8; //Moves the drawing upwards
                 }
-                poleX += DISTANCE;
             }
+            p++;
         }
-        setColor(0,0,0); //Black
     }
 }

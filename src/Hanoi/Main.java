@@ -11,7 +11,7 @@ import java.awt.*;
 public class Main extends EasyGraphics { //TODO get size from player input
 
     public static final int POLES = 3;
-    public static final int DISKS_MAX = 10;
+    public static final int DISKS_MIN = 2, DISKS_MAX = 10;
     public static int disks;
     public static int turns = 0;
 

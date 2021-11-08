@@ -41,7 +41,6 @@ public abstract class Stats {
                 JOptionPane.showMessageDialog(null, Main.stringOutOfBounds);
                 ok = false;
             }
-            catch (NullPointerException ignored) {}
 
             if (ok) {
                 if (answer != 'y' && answer != 'n') {
@@ -92,7 +91,7 @@ public abstract class Stats {
 
         File stats = new File(statsFile);
 
-        int[] records = new int[Main.DISKS_MAX+1]; //Max disks to play with + 2
+        int[] records = new int[Main.DISKS_MAX+1]; //Max disks to play with + 2 available slots, index 0 and 1
         long[] times = new long[Main.DISKS_MAX+1];
         String record = "";
 
@@ -100,7 +99,7 @@ public abstract class Stats {
 
             scanner.nextLine(); //Skips over the first line
 
-            int diskNr = 2;
+            int diskNr = Main.DISKS_MIN;
             while (scanner.hasNextLong() ) {
 
                 { //Skips over first integer and divider, for each line
@@ -119,7 +118,7 @@ public abstract class Stats {
 
                 if (diskNr == Main.disks) {
 
-                    record = records[diskNr] + " turns and " + calcTime(timeMs); //Saves the previous record
+                    record = records[diskNr] + " turns and " + calcTime(times[diskNr]); //Saves the previous record
 
                     if (Main.turns < records[diskNr] || records[diskNr] == 0) {
                         records[diskNr] = Main.turns;
@@ -148,9 +147,9 @@ public abstract class Stats {
 
             writer.printf("%14s %1s %-10s %n", "Number of disks", '|', "Previous record");
 
-            for (int i = 2; i < records.length; i++) {
+            for (int diskNr = Main.DISKS_MIN; diskNr < records.length; diskNr++) {
 
-                writer.printf("%15s %1s %-5s %1s %1s %1s %1s %n", i, '|', records[i], "turns.", '|', times[i], "ms");
+                writer.printf("%15s %1s %-5s %1s %1s %1s %1s %n", diskNr, '|', records[diskNr], "turns.", '|', times[diskNr], "ms");
             }
         }
         catch (IOException e) {

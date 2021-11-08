@@ -29,8 +29,8 @@ public class Pole extends Draw {
     //Moves a disk to the given position
     public boolean moveTo(Pole pole) {
 
-        if (!isEmpty() && isLegal(pole) ) {
-            System.out.println("Moving " + this.seeLast() + " to " + pole.getPosition() );
+        if (isLegal(pole) ) {
+            System.out.println("Moving " + seeLast() + " to " + pole.getPosition() );
 
             //moveEllipse(super.disks[nr], 1,1); //TODO move method, change values!
 
@@ -48,7 +48,7 @@ public class Pole extends Draw {
     public boolean isLegal(Pole pole) {
 
         if (!isEmpty() ) {
-            if (pole.isEmpty() || this.seeLast().getSize() < pole.seeLast().getSize() ) {
+            if (pole.isEmpty() || seeLast().getSize() < pole.seeLast().getSize() ) {
                 return true;
             }
         }

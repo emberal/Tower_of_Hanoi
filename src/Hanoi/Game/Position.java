@@ -8,6 +8,7 @@ public enum Position { //TODO
     RIGHT(600);
 
     private final int X_POS;
+    public static final int DISTANCE = 200;
 
     Position(int X_POS) {
         this.X_POS = X_POS;
