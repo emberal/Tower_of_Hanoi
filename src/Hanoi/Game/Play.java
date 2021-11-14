@@ -13,7 +13,12 @@ public class Play extends Draw {
             startGame();
         }
         else {
-            autoplay();
+            try {
+                autoplay();
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -81,15 +86,15 @@ public class Play extends Draw {
      set the top disk on the disk that's on the starting pole
         Then every other after that until the pole is empty, then do the next pole
      */
-    private void autoplay() { //TODO
+    private void autoplay() throws InterruptedException { //TODO
 
         Pole[] pole = game.getPoles();
 
         //First move
         pole[0].moveTo(pole[1]);
-        pause(10);
+        //Thread.sleep(5000);
         pole[0].moveTo(pole[2]);
-        pause(10);
+        //Thread.sleep(5000);
         pole[1].moveTo(pole[2]);
 
         while (!game.isFinished() ) {
@@ -100,15 +105,22 @@ public class Play extends Draw {
             Pole least = null, most = null;
             int counter = 0;
 
-            for (Pole p : pole) {
-                if (p.getNr() == 0) { //Locates the empty pole
-                    least = p; //FIXME, never TRUE
+            for (int i = 0; i < pole.length; i++) {
+
+                if (pole[i].getNr() == 0) { //Locates the empty pole
+                    least = pole[i];
                 }
+                //If none are empty, pick the one with least amount
+                else if ( (i < pole.length - 1) && (pole[i].getNr() < pole[i+1].getNr() ) ) { //TODO ! Main.disks??
+                    least = pole[i];
+                }
+
                 //Locates the pole that's not empty, and does not contain the largest disk
-                else if (p.getNr() > 0 && p.getPole()[0].getSize() != Main.disks) {
-                    most = p;
+                if (pole[i].getNr() > 0 && pole[i].getPole()[0].getSize() != Main.disks) {
+                    most = pole[i];
                 }
             }
+
             int r = 0; //TODO find correct pole
             //Checks each disk if the size difference of two disks is more than one, counts how many disks before the gap
             //For example, a pole might containt the following sizes: 1, 2, 3, 4, 6, 7, 8;
@@ -119,12 +131,16 @@ public class Play extends Draw {
 
                         if (counter % 2 == 0) { //If even number place first disk on the pole that is empty
                             pole[r].moveTo(least);
+                            Thread.sleep(5000);
                             pole[r].moveTo(most);
+                            Thread.sleep(5000);
                             least.moveTo(most); //FIXME Try-catch or something
                         }
                         else { //If odd number place first disk on the pole that's not empty
                             pole[r].moveTo(most);
+                            Thread.sleep(5000);
                             pole[r].moveTo(least);
+                            Thread.sleep(5000);
                             most.moveTo(least);
                         }
                     }
@@ -136,7 +152,6 @@ public class Play extends Draw {
                     r++;
                 }
             } while (pole[r].isLegal(most) ); //FIXME Wrong!
-
 
             run();
             game.printAllArrays();
