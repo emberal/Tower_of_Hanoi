@@ -12,6 +12,7 @@ public class Main extends EasyGraphics { //TODO get size from player input
 
     public static final int POLES = 3;
     public static final int DISKS_MIN = 2, DISKS_MAX = 10;
+    public static boolean autoplay = false;
     public static int disks;
     public static int turns = 0;
 
@@ -33,11 +34,11 @@ public class Main extends EasyGraphics { //TODO get size from player input
 
     public static void setUp() {
 
-        boolean ok, autoplay = false;
+        boolean ok;
 
         do {
             ok = true;
-            try {
+            try { //TODO Make more intuitive!
                 disks = Integer.parseInt(JOptionPane.showInputDialog("How many disks do you want to play with? (2-10)") );
                 autoplay = Character.toLowerCase(JOptionPane.showInputDialog("Would you like autocomplete? (Y/N)").charAt(0)) == 'y';
             }
