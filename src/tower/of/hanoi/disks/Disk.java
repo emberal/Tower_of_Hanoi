@@ -1,7 +1,7 @@
-package Hanoi.Disks;
+package tower.of.hanoi.disks;
 
-import Hanoi.Draw.Colour;
-import Hanoi.Game.Position;
+import tower.of.hanoi.draw.Colour;
+import tower.of.hanoi.game.Position;
 
 public class Disk {
 

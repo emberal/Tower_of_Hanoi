@@ -1,4 +1,4 @@
-package Hanoi.Draw;
+package tower.of.hanoi.draw;
 
 public enum Colour { //Defines the different colours of the disks
     BLACK(0, 0, 0),

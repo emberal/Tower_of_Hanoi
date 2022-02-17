@@ -1,7 +1,7 @@
-package Hanoi.Game;
+package tower.of.hanoi.game;
 
-import Hanoi.Draw.Draw;
-import Hanoi.Main;
+import tower.of.hanoi.draw.Draw;
+import tower.of.hanoi.Main;
 import javax.swing.*;
 
 public class Play extends Draw { //TODO Autoplay

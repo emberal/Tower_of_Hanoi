@@ -1,8 +1,8 @@
-package Hanoi;
+package tower.of.hanoi;
 
-import Hanoi.Game.Game;
-import Hanoi.Game.Play;
-import Hanoi.Game.Stats;
+import tower.of.hanoi.game.Game;
+import tower.of.hanoi.game.Play;
+import tower.of.hanoi.game.Stats;
 import easygraphics.EasyGraphics;
 
 import javax.swing.*;

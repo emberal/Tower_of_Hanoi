@@ -1,6 +1,6 @@
-package Hanoi.Disks;
+package tower.of.hanoi.disks;
 
-import Hanoi.Game.Position;
+import tower.of.hanoi.game.Position;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

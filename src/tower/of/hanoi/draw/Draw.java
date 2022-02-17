@@ -1,8 +1,8 @@
-package Hanoi.Draw;
+package tower.of.hanoi.draw;
 
-import Hanoi.Game.Game;
-import Hanoi.Game.Position;
-import Hanoi.Main;
+import tower.of.hanoi.game.Game;
+import tower.of.hanoi.game.Position;
+import tower.of.hanoi.Main;
 import easygraphics.EasyGraphics;
 
 public class Draw extends EasyGraphics {

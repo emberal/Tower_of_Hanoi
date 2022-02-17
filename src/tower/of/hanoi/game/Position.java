@@ -1,4 +1,4 @@
-package Hanoi.Game;
+package tower.of.hanoi.game;
 
 //The position of the disks on the board
 
