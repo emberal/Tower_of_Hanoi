@@ -81,14 +81,6 @@ public abstract class Stats {
 
     private static String readFile(long timeMs) { //TODO Test
 
-        //Creates folder if it doesn't exist
-        File assets = new File("assets");
-        if (!assets.exists() ) {
-            if (assets.mkdir() ) {
-                System.out.println("Folder created!");
-            }
-        }
-
         File stats = new File(statsFile);
 
         int[] records = new int[Main.DISKS_MAX+1]; //Max disks to play with + 2 available slots, index 0 and 1
@@ -129,7 +121,9 @@ public abstract class Stats {
                 }
                 diskNr++;
             }
-            writeToFile(records, times);
+            if (!Main.autoplay) {
+                writeToFile(records, times);
+            }
         }
         catch (FileNotFoundException e) {
             System.out.println("File not found! Trying to create new file: " + statsFile);
@@ -141,7 +135,15 @@ public abstract class Stats {
         return record;
     }
 
-    public static boolean writeToFile(int[] records, long[] times) { //TODO Test
+    public static boolean writeToFile(int[] records, long[] times) {
+
+        //Creates folder if it doesn't exist
+        File assets = new File("assets");
+        if (!assets.exists() ) {
+            if (assets.mkdir() ) {
+                System.out.println("Folder created!");
+            }
+        }
 
         try (PrintWriter writer = new PrintWriter(new FileWriter(statsFile, false) ) ) {
 
