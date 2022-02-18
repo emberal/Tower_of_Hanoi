@@ -1,11 +1,11 @@
-package Hanoi.Game;
+package tower.of.hanoi.game;
 
-import Hanoi.Disks.Pole;
-import Hanoi.Main;
+import tower.of.hanoi.disks.Pole;
+import tower.of.hanoi.Main;
 
 public class Game {
 
-    private Pole[] poles = new Pole[Main.POLES];
+    private Pole[] poles = new Pole[Main.POLES]; //TODO check against stack
 
     public Game(int DISKS) {
 

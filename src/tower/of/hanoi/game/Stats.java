@@ -1,6 +1,6 @@
-package Hanoi.Game;
+package tower.of.hanoi.game;
 
-import Hanoi.Main;
+import tower.of.hanoi.Main;
 
 import javax.swing.*;
 import java.io.*;
