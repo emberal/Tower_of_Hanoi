@@ -21,19 +21,19 @@ class PoleTest {
 
         setUp();
 
-        Assertions.assertEquals(3, pole1.getNr());
-        Assertions.assertEquals(0, pole2.getNr());
-        Assertions.assertEquals(0, pole3.getNr());
+        Assertions.assertEquals(3, pole1.getNrOfDisks());
+        Assertions.assertEquals(0, pole2.getNrOfDisks());
+        Assertions.assertEquals(0, pole3.getNrOfDisks());
 
         Assertions.assertTrue(pole1.moveTo(pole2));
 
-        Assertions.assertEquals(2, pole1.getNr());
-        Assertions.assertEquals(1, pole2.getNr());
+        Assertions.assertEquals(2, pole1.getNrOfDisks());
+        Assertions.assertEquals(1, pole2.getNrOfDisks());
 
         Assertions.assertFalse(pole3.moveTo(pole2));
 
-        Assertions.assertEquals(0, pole3.getNr());
-        Assertions.assertEquals(1, pole2.getNr());
+        Assertions.assertEquals(0, pole3.getNrOfDisks());
+        Assertions.assertEquals(1, pole2.getNrOfDisks());
     }
 
     @Test
@@ -45,9 +45,9 @@ class PoleTest {
         Assertions.assertTrue(pole2.add(new Disk(Position.RIGHT, 1)));
         Assertions.assertTrue(pole3.add(new Disk(Position.RIGHT, 0)));
 
-        Assertions.assertEquals(3, pole1.getNr());
-        Assertions.assertEquals(1, pole2.getNr());
-        Assertions.assertEquals(1, pole3.getNr());
+        Assertions.assertEquals(3, pole1.getNrOfDisks());
+        Assertions.assertEquals(1, pole2.getNrOfDisks());
+        Assertions.assertEquals(1, pole3.getNrOfDisks());
 
     }
 
@@ -60,9 +60,9 @@ class PoleTest {
         pole2.removeLast();
         pole3.removeLast();
 
-        Assertions.assertEquals(2, pole1.getNr());
-        Assertions.assertEquals(0, pole2.getNr());
-        Assertions.assertEquals(0, pole3.getNr());
+        Assertions.assertEquals(2, pole1.getNrOfDisks());
+        Assertions.assertEquals(0, pole2.getNrOfDisks());
+        Assertions.assertEquals(0, pole3.getNrOfDisks());
 
     }
 
@@ -73,7 +73,7 @@ class PoleTest {
 
         pole1.removeDisk(1);
 
-        Assertions.assertEquals(2, pole1.getNr());
+        Assertions.assertEquals(2, pole1.getNrOfDisks());
 
     }
 

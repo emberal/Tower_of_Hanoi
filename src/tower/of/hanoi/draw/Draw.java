@@ -1,5 +1,7 @@
 package tower.of.hanoi.draw;
 
+import tower.of.hanoi.datastructure.Arraystack;
+import tower.of.hanoi.disks.Disk;
 import tower.of.hanoi.game.Game;
 import tower.of.hanoi.game.Position;
 import tower.of.hanoi.Main;
@@ -69,15 +71,17 @@ public class Draw extends EasyGraphics {
         for (Position pos : Position.values() ) {
 
             int posY = getBOTTOM();
-            if (game.getPoles()[p].getPole() != null) {
+            if (game.getPoles()[p].getPoleStack() != null) {
 
-                for (int d = 0; d < game.getPoles()[p].getNr(); d++) {
+                for (int d = 0; d < game.getPoles()[p].getNrOfDisks(); d++) {
 
                     //Gets the colour from the disk
-                    final int[] RGB = game.getPoles()[p].getPole()[d].getColour().getRGB();
+                    //final int[] RGB = game.getPoles()[p].getPole()[d].getColour().getRGB();
+                    final int[] RGB = ((Arraystack<Disk>) game.getPoles()[p].getPoleStack() ).getElementAt(d).getColour().getRGB();
                     setColor(RGB[0],RGB[1],RGB[2]);
 
-                    disks[d] = fillEllipse(pos.getX_POS(), posY,game.getPoles()[p].getPole()[d].getSize() * 11 + 10, 5);
+                    disks[d] = fillEllipse(pos.getX_POS(), posY,
+                            ((Arraystack<Disk>) game.getPoles()[p].getPoleStack() ).getElementAt(d).getSize()/*game.getPoles()[p].getPole()[d].getSize()*/ * 11 + 10, 5);
                     posY -= 8; //Moves the drawing upwards
                 }
             }

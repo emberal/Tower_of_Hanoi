@@ -6,9 +6,6 @@ import tower.of.hanoi.draw.Draw;
 import tower.of.hanoi.game.Position;
 import tower.of.hanoi.Main;
 
-import java.util.Arrays;
-import java.util.Stack;
-
 public class Pole extends Draw {
 
     private StackADT<Disk> poleStack; //TODO Use stack
@@ -22,7 +19,7 @@ public class Pole extends Draw {
         //pole = new Disk[Main.disks];
         this.position = position;
 
-        for (; nr < DISKS; nr++) {
+        for (int nr = getNrOfDisks(); nr < DISKS; nr++) {
             poleStack.push(new Disk(position, DISKS - nr));
             //pole[nr] = new Disk(position, DISKS-nr); //Size decreases by 1 for each iteration
 
@@ -53,20 +50,28 @@ public class Pole extends Draw {
     }
 
     /**
-     * Checks if a move is legal, a move is legal if the pole it's moved to is empty
-     * or the disks on the pole are bigger than the one we are moving
-     * @param pole The pole the method checks against
+     * Checks if a move is legal, a move is legal if the toPole it's moved to is empty
+     * or the disks on the toPole are bigger than the one we are moving
+     * @param toPole The toPole the method checks against
      * @return true if a legal move, false otherwise
      */
-    public boolean isLegal(Pole pole) {
+    public boolean isLegal(Pole toPole) {
 
         if (!isEmpty()) {
-            if (pole.isEmpty() || poleStack.seeLast().getSize() < pole.seeLast().getSize() ) {
+            if (toPole.isEmpty() || poleStack.seeLast().getSize() < toPole.poleStack.seeLast().getSize() ) {
                 return true;
             }
             System.out.println("Not a legal move!");
         }
         return false;
+    }
+
+    public void push(Disk disk) {
+        poleStack.push(disk);
+    }
+
+    public Disk pop() {
+        return poleStack.pop();
     }
 
     @Deprecated
@@ -113,26 +118,17 @@ public class Pole extends Draw {
         return null;
     }
 
-    @Deprecated
     /**
      * Checks if array is empty, return true if it is
      */
     public boolean isEmpty() {
-        return nr == 0;
+        return poleStack.isEmpty();
     }
 
     //Prints array
     public void printArray() {
 
-        if (!isEmpty() ) {
-            for (Disk d : (Arraystack<Disk>) poleStack) {
-                System.out.print(d + "\t");
-            }
-            System.out.println();
-        }
-        else {
-            System.out.println(position + ", " + poleStack);
-        }
+        System.out.println(position + ", " + poleStack);
         //System.out.println("Length: '" + pole.length + "' Number of spaces used: '" + nr + '\'');
     }
 
@@ -141,13 +137,8 @@ public class Pole extends Draw {
         return poleStack.toString();
     }
 
-    //Getters & setters
-    public int getNr() {
-        return this.nr;
-    }
-
-    public void setNr(int nr) {
-        this.nr = nr;
+    public int getNrOfDisks() {
+        return poleStack.getNumberOfEntries();
     }
 
     public StackADT<Disk> getPoleStack() {
@@ -156,10 +147,6 @@ public class Pole extends Draw {
 
     public Disk[] getPole() {
         return pole;
-    }
-
-    public void setPole(Disk[] pole) {
-        this.pole = pole;
     }
 
     public Position getPosition() {

@@ -19,41 +19,23 @@ public class Game {
         }
     }
 
-    //Resets the disks back to starting position
-    @Deprecated
-    public void resetBoard() {
-
-        for (int p = 1; p < Main.POLES; p++) {
-
-            if (!poles[p].isEmpty() ) {
-
-                for (int i = 0; i < Main.disks; i++) {
-                    poles[0].add(poles[p].removeDisk(i) );
-                }
-            }
-        }
-        Main.turns = 0;
-    }
-
-    //Checks if the game is finished
+    /**
+     * Checks if the game is finished
+     * The game is finished if the first pole is empty, and one of the others is full
+     * @return true if finished, false if not
+     */
     public boolean isFinished() {
+        boolean finished = false;
+        Pole first = poles[0];
 
-        for (Pole pole : poles) {
-
-            if (!pole.isEmpty() ) {
-
-                int d = Main.disks;
-                for (int p = 0; p < pole.getNr(); p++) {
-
-                    //Size of the disks should be in decending order starting at index 0 (3,2,1)
-                    if (!poles[0].isEmpty() || pole.getPole()[p].getSize() != d) {
-                        return false;
-                    }
-                    d--;
-                }
+        for (int i = 1; i < poles.length && !finished; i++) {
+            //Size of the disks should be in decending order starting at index 0 (3,2,1)
+            if (first.isEmpty() && poles[i].getNrOfDisks() == Main.disks) {
+                finished = true;
             }
+
         }
-        return true;
+        return finished;
     }
 
     public void printAllArrays() {
@@ -66,9 +48,4 @@ public class Game {
     public Pole[] getPoles() {
         return poles;
     }
-
-    public void setPoles(Pole[] poles) {
-        this.poles = poles;
-    }
-
 }

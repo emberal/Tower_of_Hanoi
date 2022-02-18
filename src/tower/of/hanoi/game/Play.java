@@ -1,14 +1,22 @@
 package tower.of.hanoi.game;
 
+import tower.of.hanoi.disks.Pole;
 import tower.of.hanoi.draw.Draw;
 import tower.of.hanoi.Main;
 import javax.swing.*;
 
 public class Play extends Draw { //TODO Autoplay
 
-    public Play(Game game) {
+    public Play(Game game, boolean autoplay) {
         super(game); //Draws the board
-        startGame();
+        Stats.start = System.currentTimeMillis(); //Starts the timer
+
+        if (!autoplay) {
+            startGame();
+        }
+        else {
+            autoplay();
+        }
     }
 
     //Starts the game
@@ -63,8 +71,44 @@ public class Play extends Draw { //TODO Autoplay
                 }
             }
 
-        } while (!game.isFinished() );
+        } while (!game.isFinished());
 
         Stats.stats();
+    }
+
+    /**
+     *
+     */
+    private void autoplay() { //TODO test
+
+        Pole[] pole = game.getPoles();
+
+        while (!game.isFinished()) {
+
+            solve(pole[0].getNrOfDisks(), pole[0], pole[1], pole[2]);
+
+            run();
+            game.printAllArrays();
+
+        }
+        Stats.stats();
+    }
+
+    /**
+     *
+     * @param nr Number of disks in the left pole
+     * @param left
+     * @param center
+     * @param right
+     */
+    private void solve(int nr, Pole left, Pole center, Pole right) {
+        if (nr == 1) {
+            left.moveTo(right);
+        }
+        else {
+            solve(nr - 1, left, right, center);
+            left.moveTo(right);
+            solve(nr - 1, center, left, right);
+        }
     }
 }

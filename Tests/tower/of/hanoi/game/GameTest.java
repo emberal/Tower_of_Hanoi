@@ -11,10 +11,10 @@ class GameTest { //TODO tests
     @Test
     void constructor() {
 
-        Assertions.assertEquals(3, game.getPoles()[0].getNr());
+        Assertions.assertEquals(3, game.getPoles()[0].getNrOfDisks());
 
         for (int i = 1; i < Main.POLES; i++) {
-            Assertions.assertEquals(0, game.getPoles()[i].getNr());
+            Assertions.assertEquals(0, game.getPoles()[i].getNrOfDisks());
         }
 
         game.getPoles()[0].moveTo(game.getPoles()[1]);
