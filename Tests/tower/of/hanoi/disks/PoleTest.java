@@ -41,9 +41,9 @@ class PoleTest {
 
         setUp();
 
-        Assertions.assertFalse(pole1.add(new Disk(Position.RIGHT, 2)));
-        Assertions.assertTrue(pole2.add(new Disk(Position.RIGHT, 1)));
-        Assertions.assertTrue(pole3.add(new Disk(Position.RIGHT, 0)));
+        pole1.getPole().push(new Disk(Position.RIGHT, 2));
+        pole2.getPole().push(new Disk(Position.RIGHT, 1));
+        pole3.getPole().push(new Disk(Position.RIGHT, 0));
 
         Assertions.assertEquals(3, pole1.getNrOfDisks());
         Assertions.assertEquals(1, pole2.getNrOfDisks());
@@ -56,24 +56,13 @@ class PoleTest {
 
         setUp();
 
-        pole1.removeLast();
-        pole2.removeLast();
-        pole3.removeLast();
+        pole1.getPole().pop();
+        pole2.getPole().pop();
+        pole3.getPole().pop();
 
         Assertions.assertEquals(2, pole1.getNrOfDisks());
         Assertions.assertEquals(0, pole2.getNrOfDisks());
         Assertions.assertEquals(0, pole3.getNrOfDisks());
-
-    }
-
-    @Test
-    void removeDisk () {
-
-        setUp();
-
-        pole1.removeDisk(1);
-
-        Assertions.assertEquals(2, pole1.getNrOfDisks());
 
     }
 
@@ -115,35 +104,10 @@ class PoleTest {
 
         setUp();
 
-        pole1.printArray();
-        pole2.printArray();
-        pole3.printArray();
-
-        //new Pole().printArray();
+        System.out.println(pole1);
+        System.out.println(pole2);
+        System.out.println(pole3);
 
     }
 
-    @Test
-    void setGameSize() {
-    }
-
-    @Test
-    void getNr() {
-    }
-
-    @Test
-    void setNr() {
-    }
-
-    @Test
-    void getDisks() {
-    }
-
-    @Test
-    void setDisks() {
-    }
-
-    @Test
-    void getGameSize() {
-    }
 }

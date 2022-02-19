@@ -1,7 +1,5 @@
 package tower.of.hanoi.draw;
 
-import tower.of.hanoi.datastructure.Arraystack;
-import tower.of.hanoi.disks.Disk;
 import tower.of.hanoi.game.Game;
 import tower.of.hanoi.game.Position;
 import tower.of.hanoi.Main;
@@ -9,18 +7,19 @@ import easygraphics.EasyGraphics;
 
 public class Draw extends EasyGraphics {
 
-    private final int X = 800, Y = 400;
-    private int[] disks = new int[Main.disks];
+    private static final int X = 800, Y = 400;
 
+    private final int[] DISKS;
     protected Game game;
 
-    public Draw(Game game) {;
+    public Draw(Game game) {
+        DISKS = new int[Main.disks];
         this.game = game;
         run();
     }
 
     public Draw() {
-
+        DISKS = new int[Main.disks];
     }
 
     @Override
@@ -30,10 +29,17 @@ public class Draw extends EasyGraphics {
         drawDisks();
     }
 
+    /**
+     * The bottom line for the poles
+     * @return Y-Position of the line
+     */
     private int getBOTTOM() {
         return Y - Y / 3;
     }
 
+    /**
+     * Draws the board
+     */
     private void drawBoard() {
 
         makeWindow("Tower of Hanoi", X, Y);
@@ -53,7 +59,9 @@ public class Draw extends EasyGraphics {
         drawLine(xy, getBOTTOM(), this.X - xy, getBOTTOM() );
     }
 
-    //Draws the poles
+    /**
+     * Draws the poles
+     */
     private void drawPoles() {
 
         int i = 0;
@@ -64,24 +72,25 @@ public class Draw extends EasyGraphics {
         }
     }
 
-    //Draws the disks
+    /**
+     * Draws the disks
+     */
     private void drawDisks() { //TODO change to move methods TODO TEST
 
         int p = 0;
         for (Position pos : Position.values() ) {
 
             int posY = getBOTTOM();
-            if (game.getPoles()[p].getPoleStack() != null) {
+            if (game.getPoles()[p].getPole() != null) {
 
                 for (int d = 0; d < game.getPoles()[p].getNrOfDisks(); d++) {
 
                     //Gets the colour from the disk
-                    //final int[] RGB = game.getPoles()[p].getPole()[d].getColour().getRGB();
-                    final int[] RGB = ((Arraystack<Disk>) game.getPoles()[p].getPoleStack() ).getElementAt(d).getColour().getRGB();
+                    final int[] RGB =  game.getPoles()[p].getPole().getElementAt(d).getColour().getRGB();
                     setColor(RGB[0],RGB[1],RGB[2]);
 
-                    disks[d] = fillEllipse(pos.getX_POS(), posY,
-                            ((Arraystack<Disk>) game.getPoles()[p].getPoleStack() ).getElementAt(d).getSize()/*game.getPoles()[p].getPole()[d].getSize()*/ * 11 + 10, 5);
+                    DISKS[d] = fillEllipse(pos.getX_POS(), posY,
+                            game.getPoles()[p].getPole().getElementAt(d).getSize() * 11 + 10, 5);
                     posY -= 8; //Moves the drawing upwards
                 }
             }

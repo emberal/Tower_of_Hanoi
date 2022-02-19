@@ -21,7 +21,7 @@ public abstract class Stats {
 
         //Prints only if the player has played at least 1 round
         try {
-            if (record.charAt(0) != '0') {
+            if (record.charAt(0) != '0') { //Throws exception if the file does not exist
                 recordLine = ("The previous record was: " + record + ".\n");
             }
         }
@@ -57,7 +57,11 @@ public abstract class Stats {
         }
     }
 
-    //Calculates the time from ms to seconds and minutes
+    /**
+     * Calculates the time from ms to seconds and minutes
+     * @param ms Time in ms
+     * @return String at the format: MM minute(s), SS second(s)
+     */
     private static String calcTime(long ms) {
 
         StringBuilder builder = new StringBuilder();
@@ -79,7 +83,12 @@ public abstract class Stats {
         return builder.toString();
     }
 
-    private static String readFile(long timeMs) { //TODO Test
+    /**
+     * Reads stats from the file stats.dat and returns it as a string
+     * @param timeMs Time furing the current game in ms
+     * @return A string representation of the data in stats.dat
+     */
+    private static String readFile(long timeMs) {
 
         File stats = new File(statsFile);
 
@@ -121,20 +130,27 @@ public abstract class Stats {
                 }
                 diskNr++;
             }
-            if (!Main.autoplay) {
+            if (!Main.autoplay) { //Only writeToFile if autoplay is off
                 writeToFile(records, times);
             }
         }
         catch (FileNotFoundException e) {
             System.out.println("File not found! Trying to create new file: " + statsFile);
 
-            if (writeToFile(records, times) ) {
-                readFile(timeMs);
+            if (writeToFile(records, times) ) { //Creates a new file in writeToFile()
+                readFile(timeMs); //If successfully created, run readFile() again
             }
         }
         return record;
     }
 
+    /**
+     * Updates the stats.dat file with new data, only if the new stats is better than the current, or first time playing.
+     * If there is no data a new folder and/or file will be created
+     * @param records The best turns for each gamesize, starting at index 2 and stopping at index 10
+     * @param times The best times for each gamesize, starting at index 2 and stopping at index 10
+     * @return true if successfully written to file, false otherwise
+     */
     public static boolean writeToFile(int[] records, long[] times) {
 
         //Creates folder if it doesn't exist

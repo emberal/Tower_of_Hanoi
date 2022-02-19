@@ -41,7 +41,7 @@ public class Game {
     public void printAllArrays() {
 
         for (Pole d : poles) {
-            d.printArray();
+            System.out.println(d);
         }
     }
 

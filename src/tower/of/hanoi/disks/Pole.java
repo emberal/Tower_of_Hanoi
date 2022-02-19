@@ -8,21 +8,16 @@ import tower.of.hanoi.Main;
 
 public class Pole extends Draw {
 
-    private StackADT<Disk> poleStack; //TODO Use stack
-    private Disk[] pole;
-    private int nr = 0; //Number of Disks in the array
-    private Position position; //TODO check if nessessary
+    private Arraystack<Disk> pole;
+    private final Position POSITION; //TODO check if nessessary
 
-    public Pole(int DISKS, Position position) {
+    public Pole(int DISKS, Position POSITION) {
 
-        poleStack = new Arraystack<>(Main.disks);
-        //pole = new Disk[Main.disks];
-        this.position = position;
+        pole = new Arraystack<>(Main.disks);
+        this.POSITION = POSITION;
 
         for (int nr = getNrOfDisks(); nr < DISKS; nr++) {
-            poleStack.push(new Disk(position, DISKS - nr));
-            //pole[nr] = new Disk(position, DISKS-nr); //Size decreases by 1 for each iteration
-
+            pole.push(new Disk(POSITION, DISKS - nr));
         }
     }
 
@@ -34,14 +29,12 @@ public class Pole extends Draw {
     public boolean moveTo(Pole pole) {
 
         if (isLegal(pole)) {
-            System.out.println("Moving " + poleStack.seeLast() + " to " + pole.getPosition() );
+            System.out.println("Moving " + this.pole.seeLast() + " to " + pole.getPOSITION() );
 
             //moveEllipse(super.disks[nr], 1,1); //TODO move method, change values!
 
-            pole.poleStack.push(poleStack.pop());
-            //pole.add(removeLast() );
-            pole.poleStack.seeLast().setPosition(pole.position);
-            //pole.seeLast().setPosition(pole.position); //Sets the position of the disk to be equal to the pole
+            pole.pole.push(this.pole.pop());
+            pole.pole.seeLast().setPosition(pole.POSITION);
             Main.turns++;
 
             return true;
@@ -58,7 +51,7 @@ public class Pole extends Draw {
     public boolean isLegal(Pole toPole) {
 
         if (!isEmpty()) {
-            if (toPole.isEmpty() || poleStack.seeLast().getSize() < toPole.poleStack.seeLast().getSize() ) {
+            if (toPole.isEmpty() || pole.seeLast().getSize() < toPole.pole.seeLast().getSize() ) {
                 return true;
             }
             System.out.println("Not a legal move!");
@@ -66,94 +59,28 @@ public class Pole extends Draw {
         return false;
     }
 
-    public void push(Disk disk) {
-        poleStack.push(disk);
-    }
-
-    public Disk pop() {
-        return poleStack.pop();
-    }
-
-    @Deprecated
-    //Adds a disk to array
-    public boolean add(Disk disk) {
-
-        if (nr < Main.disks) {
-            pole[nr] = disk;
-            nr++;
-            return true;
-        }
-        return false;
-    }
-
-    @Deprecated
-    /**
-     * Removes the last disk from an array
-     */
-    public Disk removeLast() {
-
-        return removeDisk(nr-1);
-    }
-
-    @Deprecated
-    //Removes any disk from an array
-    public Disk removeDisk(int pos) {
-
-        if (!isEmpty() ) {
-            Disk disk = pole[pos];
-
-            pole[pos] = null;
-            nr--;
-            return disk;
-        }
-        return null;
-    }
-
-    @Deprecated
-    //Returns the disk with the highest nr on a pole
-    public Disk seeLast() {
-        if (!isEmpty() ) {
-            return pole[nr-1];
-        }
-        return null;
-    }
-
     /**
      * Checks if array is empty, return true if it is
+     * @return true if empty, false otherwise
      */
     public boolean isEmpty() {
-        return poleStack.isEmpty();
-    }
-
-    //Prints array
-    public void printArray() {
-
-        System.out.println(position + ", " + poleStack);
-        //System.out.println("Length: '" + pole.length + "' Number of spaces used: '" + nr + '\'');
+        return pole.isEmpty();
     }
 
     @Override
     public String toString() {
-        return poleStack.toString();
+        return POSITION + ", " + pole;
     }
 
     public int getNrOfDisks() {
-        return poleStack.getNumberOfEntries();
+        return pole.getNumberOfEntries();
     }
 
-    public StackADT<Disk> getPoleStack() {
-        return poleStack;
-    }
-
-    public Disk[] getPole() {
+    public Arraystack<Disk> getPole() {
         return pole;
     }
 
-    public Position getPosition() {
-        return position;
-    }
-
-    public void setPosition(Position position) {
-        this.position = position;
+    public Position getPOSITION() {
+        return POSITION;
     }
 }

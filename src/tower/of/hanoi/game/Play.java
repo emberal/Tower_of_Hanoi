@@ -42,29 +42,34 @@ public class Play extends Draw { //TODO Autoplay
         } while (!ok);
     }
 
+    /**
+     *
+     */
     private void move() {
 
         int posFrom, posTo;
 
         do {
+            Pole[] poles = game.getPoles();
+
             posFrom = Integer.parseInt(getText("Choose pole (1 - " + (Main.POLES) + ")") ) - 1;
 
-            if (game.getPoles()[posFrom].isEmpty() ) {
+            if (poles[posFrom].isEmpty() ) {
                 JOptionPane.showMessageDialog(null, "No disks in pole, try a different one!");
             }
             else {
-                System.out.println(game.getPoles()[posFrom].getPosition() + " selected");
+                System.out.println(poles[posFrom].getPOSITION() + " selected");
 
                 posTo = Integer.parseInt(getText("Choose pole (1 - " + (Main.POLES) + ")")) - 1;
 
                 if (posFrom == posTo) {
                     JOptionPane.showMessageDialog(null, "You can't choose the same pole");
                 }
-                else if (!game.getPoles()[posFrom].isLegal(game.getPoles()[posTo]) ) {
+                else if (!poles[posFrom].isLegal(poles[posTo]) ) {
                     JOptionPane.showMessageDialog(null, "Not a Legal move!");
                 }
                 else { //If move is successful
-                    game.getPoles()[posFrom].moveTo(game.getPoles()[posTo]);
+                    poles[posFrom].moveTo(poles[posTo]);
 
                     run();
                     game.printAllArrays();
@@ -77,29 +82,25 @@ public class Play extends Draw { //TODO Autoplay
     }
 
     /**
-     *
+     * Autocompletes the game, and then shows the stats page
      */
-    private void autoplay() { //TODO test
+    private void autoplay() {
 
         Pole[] pole = game.getPoles();
 
-        while (!game.isFinished()) {
+        solve(pole[0].getNrOfDisks(), pole[0], pole[1], pole[2]);
 
-            solve(pole[0].getNrOfDisks(), pole[0], pole[1], pole[2]);
-
-            run();
-            game.printAllArrays();
-
-        }
+        run();
+        game.printAllArrays();
         Stats.stats();
     }
 
     /**
-     *
+     * Uses recursive calls to solve the problem
      * @param nr Number of disks in the left pole
-     * @param left
-     * @param center
-     * @param right
+     * @param left First pole
+     * @param center Second polr
+     * @param right Third pole
      */
     private void solve(int nr, Pole left, Pole center, Pole right) {
         if (nr == 1) {
