@@ -22,9 +22,9 @@ public class Play extends Draw {
     //Starts the game
     private void startGame() {
 
-        boolean ok;
         Stats.start = System.currentTimeMillis(); //Starts the timer
 
+        boolean ok;
         do { //Choose Pole
             ok = true;
             try {
@@ -48,7 +48,6 @@ public class Play extends Draw {
     private void move() {
 
         int posFrom, posTo;
-
         do {
             Pole[] poles = game.getPoles();
 
@@ -71,11 +70,10 @@ public class Play extends Draw {
                 else { //If move is successful
                     poles[posFrom].moveTo(poles[posTo]);
 
-                    run();
+                    run(); //Draws the new window
                     game.printAllArrays();
                 }
             }
-
         } while (!game.isFinished());
 
         Stats.stats();
@@ -90,7 +88,7 @@ public class Play extends Draw {
 
         solve(pole[0].getNrOfDisks(), pole[0], pole[1], pole[2]);
 
-        run();
+        run(); //Draws the new window
         game.printAllArrays();
         Stats.stats();
     }

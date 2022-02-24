@@ -8,17 +8,15 @@ import easygraphics.EasyGraphics;
 import javax.swing.*;
 import java.awt.*;
 
-public class Main extends EasyGraphics { //TODO get size from player input
+public class Main extends EasyGraphics {
 
-    public static final int POLES = 3;
-    public static final int DISKS_MIN = 2, DISKS_MAX = 10;
-    public static boolean autoplay = false; // Yes = 0, No = 1, Cancel = 2
-    public static int disks;
-    public static int turns = 0;
+    public static final int POLES = 3, DISKS_MIN = 2, DISKS_MAX = 10;
+    public static boolean autoplay = false; // showConfirmDialog returns: Yes = 0, No = 1, Cancel = 2
+    public static int disks, turns = 0;
 
-    public static final String numberFormatExc = "Invalid input, must be an integer number";
-    public static final String arrayOutOfBounds = "Invalid input, out of bounds";
-    public static final String stringOutOfBounds = "Input can't be empty";
+    public static final String numberFormatExc = "Invalid input, must be an integer number",
+            arrayOutOfBounds = "Invalid input, out of bounds",
+            stringOutOfBounds = "Input can't be empty";
 
     public static void main(String[] args) {
         launch(args);
@@ -26,9 +24,7 @@ public class Main extends EasyGraphics { //TODO get size from player input
 
     @Override
     public void run() {
-
         System.out.println("Starting game...");
-
         setUp();
     }
 

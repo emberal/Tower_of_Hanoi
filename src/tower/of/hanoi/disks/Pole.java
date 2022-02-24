@@ -1,6 +1,5 @@
 package tower.of.hanoi.disks;
 
-import tower.of.hanoi.adt.StackADT;
 import tower.of.hanoi.datastructure.Arraystack;
 import tower.of.hanoi.draw.Draw;
 import tower.of.hanoi.game.Position;
@@ -8,7 +7,7 @@ import tower.of.hanoi.Main;
 
 public class Pole extends Draw {
 
-    private Arraystack<Disk> pole;
+    private final Arraystack<Disk> pole;
     private final Position POSITION; //TODO check if nessessary
 
     public Pole(int DISKS, Position POSITION) {

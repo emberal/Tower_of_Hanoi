@@ -5,14 +5,13 @@ import tower.of.hanoi.Main;
 
 public class Game {
 
-    private Pole[] poles = new Pole[Main.POLES]; //TODO check against stack
+    private final Pole[] poles = new Pole[Main.POLES]; //TODO check against stack
 
     public Game(int DISKS) {
 
         int i = 0;
         while (i < Main.POLES) {
             for (Position p : Position.values() ) {
-
                 poles[i] = new Pole(DISKS, p); //Starting disks
                 DISKS = 0; i++; //Resets for the remaining disks
             }

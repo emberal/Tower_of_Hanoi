@@ -60,7 +60,7 @@ public abstract class Stats {
 
         StringBuilder builder = new StringBuilder();
 
-        long sec = (ms + 500) / 1000; //Total number of seconds, (+ 500) either round up or down
+        long sec = (ms + 500) / 1000; //Total number of seconds, (+ 500) to either round up or down
         long min = sec / 60;
         sec = sec % 60;
 

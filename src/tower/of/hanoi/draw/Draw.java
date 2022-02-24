@@ -5,11 +5,11 @@ import tower.of.hanoi.game.Position;
 import tower.of.hanoi.Main;
 import easygraphics.EasyGraphics;
 
-public class Draw extends EasyGraphics {
+public class Draw extends EasyGraphics { //TODO switch to JavaFX or similar
 
     private static final int X = 800, Y = 400;
 
-    private final int[] DISKS;
+    private final int[] DISKS; //TODO
     protected Game game;
 
     public Draw(Game game) {
@@ -56,7 +56,7 @@ public class Draw extends EasyGraphics {
         drawRectangle(xy, xy, X - xy * 2, Y - xy * 2);
 
         //Bottom line
-        drawLine(xy, getBOTTOM(), this.X - xy, getBOTTOM() );
+        drawLine(xy, getBOTTOM(), X - xy, getBOTTOM() );
     }
 
     /**
