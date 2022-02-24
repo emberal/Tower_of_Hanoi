@@ -12,7 +12,7 @@ public class Main extends EasyGraphics { //TODO get size from player input
 
     public static final int POLES = 3;
     public static final int DISKS_MIN = 2, DISKS_MAX = 10;
-    public static boolean autoplay = false;
+    public static boolean autoplay = false; // Yes = 0, No = 1, Cancel = 2
     public static int disks;
     public static int turns = 0;
 
@@ -38,21 +38,17 @@ public class Main extends EasyGraphics { //TODO get size from player input
 
         do {
             ok = true;
-            try { //TODO Make more intuitive!
+            try {
                 disks = Integer.parseInt(JOptionPane.showInputDialog("How many disks do you want to play with? (2-10)") );
-                autoplay = Character.toLowerCase(JOptionPane.showInputDialog("Would you like autocomplete? (Y/N)").charAt(0)) == 'y';
+                autoplay = JOptionPane.showConfirmDialog(null, "Would you like autocomplete?") == 0;
             }
             catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, numberFormatExc);
                 ok = false;
             }
-            catch (StringIndexOutOfBoundsException e) { //TODO move to it's own try-catch?
-                JOptionPane.showMessageDialog(null, stringOutOfBounds);
-                ok = false;
-            }
             if (ok) {
                 if (disks < 2) {
-                    JOptionPane.showMessageDialog(null, "You need a minimum of 2 disks to play the game.");
+                    JOptionPane.showMessageDialog(null, "You need a minimum of " + DISKS_MIN + " disks to play the game.");
                     ok = false;
                 }
                 else if (disks == 420) { //Reset file
@@ -60,7 +56,7 @@ public class Main extends EasyGraphics { //TODO get size from player input
                     ok = false;
                 }
                 else if (disks > DISKS_MAX) {
-                    JOptionPane.showMessageDialog(null, "Too many disks.");
+                    JOptionPane.showMessageDialog(null, "Too many disks, you can have no more than " + DISKS_MAX + ".");
                     ok = false;
                 }
             }

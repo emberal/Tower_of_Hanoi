@@ -16,8 +16,7 @@ public abstract class Stats {
         long timeMs = System.currentTimeMillis() - start;
         System.out.println(timeMs + "ms");
 
-        String record = readFile(timeMs);
-        String recordLine = "";
+        String record = readFile(timeMs), recordLine = "";
 
         //Prints only if the player has played at least 1 round
         try {
@@ -25,33 +24,28 @@ public abstract class Stats {
                 recordLine = ("The previous record was: " + record + ".\n");
             }
         }
-        catch (StringIndexOutOfBoundsException ignored) {}
+        catch (StringIndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
+        }
 
-        boolean ok; char answer = ' ';
+        boolean ok, reset = false;
         do {
             ok = true;
             try {
-                answer = Character.toLowerCase(JOptionPane.showInputDialog("Board size: " + Main.POLES + '\n' +
+                reset = Character.toLowerCase(JOptionPane.showConfirmDialog(null, "Board size: " + Main.POLES + '\n' +
                         "Number of disks: " + Main.disks + '\n' +
-                        "Congratulations, you won!\nIt took you " + Main.turns + " turns and " + calcTime(timeMs) + '\n' +
+                        "Congratulations, you won!\n" +
+                        "It took you " + Main.turns + " turns and " + calcTime(timeMs) + '\n' +
                         recordLine +
-                        "Would you like to play again? (Y/N)").charAt(0) );
+                        "Would you like to play again? (Y/N)")) == 0;
             }
             catch (StringIndexOutOfBoundsException e) {
                 JOptionPane.showMessageDialog(null, Main.stringOutOfBounds);
                 ok = false;
             }
-
-            if (ok) {
-                if (answer != 'y' && answer != 'n') {
-                    JOptionPane.showMessageDialog(null,
-                            "Wrong input, please type 'Y' for yes or 'N' for no");
-                    ok = false;
-                }
-            }
         } while (!ok);
 
-        if (answer == 'y') {
+        if (reset) {
             Main.turns = 0;
             Main.setUp();
         }

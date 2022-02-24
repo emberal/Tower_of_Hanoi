@@ -5,7 +5,7 @@ import tower.of.hanoi.draw.Draw;
 import tower.of.hanoi.Main;
 import javax.swing.*;
 
-public class Play extends Draw { //TODO Autoplay
+public class Play extends Draw {
 
     public Play(Game game, boolean autoplay) {
         super(game); //Draws the board
