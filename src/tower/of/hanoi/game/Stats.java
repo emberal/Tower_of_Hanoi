@@ -16,49 +16,46 @@ public abstract class Stats {
         long timeMs = System.currentTimeMillis() - start;
         System.out.println(timeMs + "ms");
 
-        String record = readFile(timeMs);
-        String recordLine = "";
+        String record = readFile(timeMs), recordLine = "";
 
         //Prints only if the player has played at least 1 round
         try {
-            if (record.charAt(0) != '0') {
+            if (record.charAt(0) != '0') { //Throws exception if the file does not exist
                 recordLine = ("The previous record was: " + record + ".\n");
             }
         }
-        catch (StringIndexOutOfBoundsException ignored) {}
+        catch (StringIndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
+        }
 
-        boolean ok; char answer = ' ';
+        boolean ok, reset = false;
         do {
             ok = true;
             try {
-                answer = Character.toLowerCase(JOptionPane.showInputDialog("Board size: " + Main.POLES + '\n' +
+                reset = Character.toLowerCase(JOptionPane.showConfirmDialog(null, "Board size: " + Main.POLES + '\n' +
                         "Number of disks: " + Main.disks + '\n' +
-                        "Congratulations, you won!\nIt took you " + Main.turns + " turns and " + calcTime(timeMs) + '\n' +
+                        "Congratulations, you won!\n" +
+                        "It took you " + Main.turns + " turns and " + calcTime(timeMs) + '\n' +
                         recordLine +
-                        "Would you like to play again? (Y/N)").charAt(0) );
+                        "Would you like to play again? (Y/N)")) == 0;
             }
             catch (StringIndexOutOfBoundsException e) {
-                JOptionPane.showMessageDialog(null,"Input can't be empty");
+                JOptionPane.showMessageDialog(null, Main.stringOutOfBounds);
                 ok = false;
-            }
-            catch (NullPointerException ignored) {}
-
-            if (ok) {
-                if (answer != 'y' && answer != 'n') {
-                    JOptionPane.showMessageDialog(null,
-                            "Wrong input, please type 'Y' for yes or 'N' for no");
-                    ok = false;
-                }
             }
         } while (!ok);
 
-        if (answer == 'y') {
+        if (reset) {
             Main.turns = 0;
             Main.setUp();
         }
     }
 
-    //Calculates the time from ms to seconds and minutes
+    /**
+     * Calculates the time from ms to seconds and minutes
+     * @param ms Time in ms
+     * @return String at the format: MM minute(s), SS second(s)
+     */
     private static String calcTime(long ms) {
 
         StringBuilder builder = new StringBuilder();
@@ -80,19 +77,16 @@ public abstract class Stats {
         return builder.toString();
     }
 
-    private static String readFile(long timeMs) { //TODO Test
-
-        //Creates folder if it doesn't exist
-        File assets = new File("assets");
-        if (!assets.exists() ) {
-            if (assets.mkdir() ) {
-                System.out.println("Folder created!");
-            }
-        }
+    /**
+     * Reads stats from the file stats.dat and returns it as a string
+     * @param timeMs Time furing the current game in ms
+     * @return A string representation of the data in stats.dat
+     */
+    private static String readFile(long timeMs) {
 
         File stats = new File(statsFile);
 
-        int[] records = new int[Main.DISKS_MAX+1]; //Max disks to play with + 2
+        int[] records = new int[Main.DISKS_MAX+1]; //Max disks to play with + 2 available slots, index 0 and 1
         long[] times = new long[Main.DISKS_MAX+1];
         String record = "";
 
@@ -100,7 +94,7 @@ public abstract class Stats {
 
             scanner.nextLine(); //Skips over the first line
 
-            int diskNr = 2;
+            int diskNr = Main.DISKS_MIN;
             while (scanner.hasNextLong() ) {
 
                 { //Skips over first integer and divider, for each line
@@ -119,7 +113,7 @@ public abstract class Stats {
 
                 if (diskNr == Main.disks) {
 
-                    record = records[diskNr] + " turns and " + calcTime(timeMs); //Saves the previous record
+                    record = records[diskNr] + " turns and " + calcTime(times[diskNr]); //Saves the previous record
 
                     if (Main.turns < records[diskNr] || records[diskNr] == 0) {
                         records[diskNr] = Main.turns;
@@ -130,27 +124,44 @@ public abstract class Stats {
                 }
                 diskNr++;
             }
-            writeToFile(records, times);
+            if (!Main.autoplay) { //Only writeToFile if autoplay is off
+                writeToFile(records, times);
+            }
         }
         catch (FileNotFoundException e) {
             System.out.println("File not found! Trying to create new file: " + statsFile);
 
-            if (writeToFile(records, times) ) {
-                readFile(timeMs);
+            if (writeToFile(records, times) ) { //Creates a new file in writeToFile()
+                readFile(timeMs); //If successfully created, run readFile() again
             }
         }
         return record;
     }
 
-    public static boolean writeToFile(int[] records, long[] times) { //TODO Test
+    /**
+     * Updates the stats.dat file with new data, only if the new stats is better than the current, or first time playing.
+     * If there is no data a new folder and/or file will be created
+     * @param records The best turns for each gamesize, starting at index 2 and stopping at index 10
+     * @param times The best times for each gamesize, starting at index 2 and stopping at index 10
+     * @return true if successfully written to file, false otherwise
+     */
+    public static boolean writeToFile(int[] records, long[] times) {
+
+        //Creates folder if it doesn't exist
+        File assets = new File("assets");
+        if (!assets.exists() ) {
+            if (assets.mkdir() ) {
+                System.out.println("Folder created!");
+            }
+        }
 
         try (PrintWriter writer = new PrintWriter(new FileWriter(statsFile, false) ) ) {
 
             writer.printf("%14s %1s %-10s %n", "Number of disks", '|', "Previous record");
 
-            for (int i = 2; i < records.length; i++) {
+            for (int diskNr = Main.DISKS_MIN; diskNr < records.length; diskNr++) {
 
-                writer.printf("%15s %1s %-5s %1s %1s %1s %1s %n", i, '|', records[i], "turns.", '|', times[i], "ms");
+                writer.printf("%15s %1s %-5s %1s %1s %1s %1s %n", diskNr, '|', records[diskNr], "turns.", '|', times[diskNr], "ms");
             }
         }
         catch (IOException e) {

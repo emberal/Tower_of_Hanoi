@@ -50,6 +50,13 @@ public class Arraystack<T> implements StackADT<T>, Iterable<T> {
         return stack[numberOfEntries - 1];
     }
 
+    public T getElementAt(int index) {
+        if (index < 0 || index >= stack.length) {
+            throw new IndexOutOfBoundsException("Out of bounds at index: " + index);
+        }
+        return stack[index];
+    }
+
     @Override
     public String toString() {
         return  "Stack{" +
