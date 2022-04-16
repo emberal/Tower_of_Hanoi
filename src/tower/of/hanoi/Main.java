@@ -48,7 +48,8 @@ public class Main extends EasyGraphics {
                     ok = false;
                 }
                 else if (disks == 420) { //Reset file
-                    Stats.writeToFile(new int[DISKS_MAX+1], new long[DISKS_MAX+1]);
+                    Stats.writeToFile(new int[DISKS_MAX + 1], new long[DISKS_MAX + 1]);
+                    System.out.println("All records have been reset to 0");
                     ok = false;
                 }
                 else if (disks > DISKS_MAX) {

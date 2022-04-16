@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 public class StackIterator<T> implements Iterator<T> {
 
-    private StackADT<T> stack;
+    private final StackADT<T> stack;
     private int currentIndex;
 
     public StackIterator(StackADT<T> stack) {

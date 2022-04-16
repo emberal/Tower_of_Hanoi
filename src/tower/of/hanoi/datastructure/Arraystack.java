@@ -11,7 +11,7 @@ public class Arraystack<T> implements StackADT<T>, Iterable<T> {
 
     private static final int STD_LEN = 3;
 
-    private T[] stack;
+    private final T[] stack;
     private int numberOfEntries;
 
     public Arraystack() {
