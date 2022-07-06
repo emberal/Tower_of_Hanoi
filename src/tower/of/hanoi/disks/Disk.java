@@ -17,7 +17,7 @@ public class Disk {
 
     @Override
     public String toString() {
-        return  position + "{" +
+        return position + "{" +
                 "size=" + size +
                 /*", xPos=" + xPos +
                 ", yPos=" + yPos +*/
@@ -28,12 +28,13 @@ public class Disk {
 
     /**
      * Sets a different colour to each disk
+     *
      * @return The colour, or null if there is no match
      */
     private Colour setColour() {
 
-        for (Colour c : Colour.values() ) {
-            if (size - 1 == c.ordinal() ) {
+        for (Colour c : Colour.values()) {
+            if (size - 1 == c.ordinal()) {
                 return c;
             }
         }

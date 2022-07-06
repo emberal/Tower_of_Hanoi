@@ -22,13 +22,14 @@ public class Pole extends Draw {
 
     /**
      * Moves a disk to the given position
+     *
      * @param pole The pole the disk will be moved to
      * @return true if successfully moved, false otherwise
      */
     public boolean moveTo(Pole pole) {
 
         if (isLegal(pole)) {
-            System.out.println("Moving " + this.pole.seeLast() + " to " + pole.getPOSITION() );
+            System.out.println("Moving " + this.pole.seeLast() + " to " + pole.getPOSITION());
 
             //moveEllipse(super.disks[nr], 1,1); //TODO move method, change values!
 
@@ -44,13 +45,14 @@ public class Pole extends Draw {
     /**
      * Checks if a move is legal, a move is legal if the toPole it's moved to is empty
      * or the disks on the toPole are bigger than the one we are moving
+     *
      * @param toPole The toPole the method checks against
      * @return true if a legal move, false otherwise
      */
     public boolean isLegal(Pole toPole) {
 
         if (!isEmpty()) {
-            if (toPole.isEmpty() || pole.seeLast().getSize() < toPole.pole.seeLast().getSize() ) {
+            if (toPole.isEmpty() || pole.seeLast().getSize() < toPole.pole.seeLast().getSize()) {
                 return true;
             }
             System.out.println("Not a legal move!");
@@ -60,6 +62,7 @@ public class Pole extends Draw {
 
     /**
      * Checks if array is empty, return true if it is
+     *
      * @return true if empty, false otherwise
      */
     public boolean isEmpty() {

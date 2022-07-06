@@ -53,6 +53,7 @@ public abstract class Stats {
 
     /**
      * Calculates the time from ms to seconds and minutes
+     *
      * @param ms Time in ms
      * @return String at the format: MM minute(s), SS second(s)
      */
@@ -79,6 +80,7 @@ public abstract class Stats {
 
     /**
      * Reads stats from the file stats.dat and returns it as a string
+     *
      * @param timeMs Time furing the current game in ms
      * @return A string representation of the data in stats.dat
      */
@@ -86,16 +88,16 @@ public abstract class Stats {
 
         File stats = new File(statsFile);
 
-        int[] records = new int[Main.DISKS_MAX+1]; //Max disks to play with + 2 available slots, index 0 and 1
-        long[] times = new long[Main.DISKS_MAX+1];
+        int[] records = new int[Main.DISKS_MAX + 1]; //Max disks to play with + 2 available slots, index 0 and 1
+        long[] times = new long[Main.DISKS_MAX + 1];
         String record = "";
 
-        try (Scanner scanner = new Scanner(stats) ) {
+        try (Scanner scanner = new Scanner(stats)) {
 
             scanner.nextLine(); //Skips over the first line
 
             int diskNr = Main.DISKS_MIN;
-            while (scanner.hasNextLong() ) {
+            while (scanner.hasNextLong()) {
 
                 { //Skips over first integer and divider, for each line
                     scanner.nextInt();
@@ -105,7 +107,8 @@ public abstract class Stats {
                 records[diskNr] = scanner.nextInt(); //Saves the old turn records
 
                 { //Skips "turns |"
-                    scanner.next(); scanner.next();
+                    scanner.next();
+                    scanner.next();
                 }
 
                 times[diskNr] = scanner.nextLong(); //Saves the old time records
@@ -131,7 +134,7 @@ public abstract class Stats {
         catch (FileNotFoundException e) {
             System.out.println("File not found! Trying to create new file: " + statsFile);
 
-            if (writeToFile(records, times) ) { //Creates a new file in writeToFile()
+            if (writeToFile(records, times)) { //Creates a new file in writeToFile()
                 readFile(timeMs); //If successfully created, run readFile() again
             }
         }
@@ -141,21 +144,22 @@ public abstract class Stats {
     /**
      * Updates the stats.dat file with new data, only if the new stats is better than the current, or first time playing.
      * If there is no data a new folder and/or file will be created
+     *
      * @param records The best turns for each gamesize, starting at index 2 and stopping at index 10
-     * @param times The best times for each gamesize, starting at index 2 and stopping at index 10
+     * @param times   The best times for each gamesize, starting at index 2 and stopping at index 10
      * @return true if successfully written to file, false otherwise
      */
     public static boolean writeToFile(int[] records, long[] times) {
 
         //Creates folder if it doesn't exist
         File assets = new File("assets");
-        if (!assets.exists() ) {
-            if (assets.mkdir() ) {
+        if (!assets.exists()) {
+            if (assets.mkdir()) {
                 System.out.println("Folder created!");
             }
         }
 
-        try (PrintWriter writer = new PrintWriter(new FileWriter(statsFile, false) ) ) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(statsFile, false))) {
 
             writer.printf("%14s %1s %-10s %n", "Number of disks", '|', "Previous record");
 

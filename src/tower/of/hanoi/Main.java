@@ -35,7 +35,7 @@ public class Main extends EasyGraphics {
         do {
             ok = true;
             try {
-                disks = Integer.parseInt(JOptionPane.showInputDialog("How many disks do you want to play with? (2-10)") );
+                disks = Integer.parseInt(JOptionPane.showInputDialog("How many disks do you want to play with? (2-10)"));
                 autoplay = JOptionPane.showConfirmDialog(null, "Would you like autocomplete?") == 0;
             }
             catch (NumberFormatException e) {
@@ -48,7 +48,7 @@ public class Main extends EasyGraphics {
                     ok = false;
                 }
                 else if (disks == 420) { //Reset file
-                    Stats.writeToFile(new int[DISKS_MAX+1], new long[DISKS_MAX+1]);
+                    Stats.writeToFile(new int[DISKS_MAX + 1], new long[DISKS_MAX + 1]);
                     ok = false;
                 }
                 else if (disks > DISKS_MAX) {

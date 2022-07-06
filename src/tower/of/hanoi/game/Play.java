@@ -3,6 +3,7 @@ package tower.of.hanoi.game;
 import tower.of.hanoi.disks.Pole;
 import tower.of.hanoi.draw.Draw;
 import tower.of.hanoi.Main;
+
 import javax.swing.*;
 
 public class Play extends Draw {
@@ -51,9 +52,9 @@ public class Play extends Draw {
         do {
             Pole[] poles = game.getPoles();
 
-            posFrom = Integer.parseInt(getText("Choose pole (1 - " + (Main.POLES) + ")") ) - 1;
+            posFrom = Integer.parseInt(getText("Choose pole (1 - " + (Main.POLES) + ")")) - 1;
 
-            if (poles[posFrom].isEmpty() ) {
+            if (poles[posFrom].isEmpty()) {
                 JOptionPane.showMessageDialog(null, "No disks in pole, try a different one!");
             }
             else {
@@ -64,7 +65,7 @@ public class Play extends Draw {
                 if (posFrom == posTo) {
                     JOptionPane.showMessageDialog(null, "You can't choose the same pole");
                 }
-                else if (!poles[posFrom].isLegal(poles[posTo]) ) {
+                else if (!poles[posFrom].isLegal(poles[posTo])) {
                     JOptionPane.showMessageDialog(null, "Not a Legal move!");
                 }
                 else { //If move is successful
@@ -95,10 +96,11 @@ public class Play extends Draw {
 
     /**
      * Uses recursive calls to solve the problem
-     * @param nr Number of disks in the left pole
-     * @param left First pole
+     *
+     * @param nr     Number of disks in the left pole
+     * @param left   First pole
      * @param center Second polr
-     * @param right Third pole
+     * @param right  Third pole
      */
     private void solve(int nr, Pole left, Pole center, Pole right) {
         if (nr == 1) {

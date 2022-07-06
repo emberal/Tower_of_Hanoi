@@ -11,9 +11,10 @@ public class Game {
 
         int i = 0;
         while (i < Main.POLES) {
-            for (Position p : Position.values() ) {
+            for (Position p : Position.values()) {
                 poles[i] = new Pole(DISKS, p); //Starting disks
-                DISKS = 0; i++; //Resets for the remaining disks
+                DISKS = 0; //Resets for the remaining disks
+                i++;
             }
         }
     }
@@ -21,6 +22,7 @@ public class Game {
     /**
      * Checks if the game is finished
      * The game is finished if the first pole is empty, and one of the others is full
+     *
      * @return true if finished, false if not
      */
     public boolean isFinished() {

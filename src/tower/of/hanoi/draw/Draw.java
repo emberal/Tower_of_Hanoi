@@ -31,6 +31,7 @@ public class Draw extends EasyGraphics { //TODO switch to JavaFX or similar
 
     /**
      * The bottom line for the poles
+     *
      * @return Y-Position of the line
      */
     private int getBOTTOM() {
@@ -47,16 +48,16 @@ public class Draw extends EasyGraphics { //TODO switch to JavaFX or similar
         int xy = 5;
 
         //Resets the board after a move
-        setColor(255,255,255); //White
+        setColor(255, 255, 255); //White
         fillRectangle(xy, xy, X - xy * 3, Y - xy * 2);
 
-        setColor(0,0,0); //Black
+        setColor(0, 0, 0); //Black
 
         //Border
         drawRectangle(xy, xy, X - xy * 2, Y - xy * 2);
 
         //Bottom line
-        drawLine(xy, getBOTTOM(), X - xy, getBOTTOM() );
+        drawLine(xy, getBOTTOM(), X - xy, getBOTTOM());
     }
 
     /**
@@ -65,10 +66,10 @@ public class Draw extends EasyGraphics { //TODO switch to JavaFX or similar
     private void drawPoles() {
 
         int i = 0;
-        for (Position pos : Position.values() ) {
+        for (Position pos : Position.values()) {
             drawLine(pos.getX_POS(), getBOTTOM(), pos.getX_POS(), getBOTTOM() / 2);
             i++;
-            drawString(Integer.toString(i), pos.getX_POS() - 3, getBOTTOM() + 30 );
+            drawString(Integer.toString(i), pos.getX_POS() - 3, getBOTTOM() + 30);
         }
     }
 
@@ -78,7 +79,7 @@ public class Draw extends EasyGraphics { //TODO switch to JavaFX or similar
     private void drawDisks() { //TODO change to move methods TODO TEST
 
         int p = 0;
-        for (Position pos : Position.values() ) {
+        for (Position pos : Position.values()) {
 
             int posY = getBOTTOM();
             if (game.getPoles()[p].getPole() != null) {
@@ -86,8 +87,8 @@ public class Draw extends EasyGraphics { //TODO switch to JavaFX or similar
                 for (int d = 0; d < game.getPoles()[p].getNrOfDisks(); d++) {
 
                     //Gets the colour from the disk
-                    final int[] RGB =  game.getPoles()[p].getPole().getElementAt(d).getColour().getRGB();
-                    setColor(RGB[0],RGB[1],RGB[2]);
+                    final int[] RGB = game.getPoles()[p].getPole().getElementAt(d).getColour().getRGB();
+                    setColor(RGB[0], RGB[1], RGB[2]);
 
                     DISKS[d] = fillEllipse(pos.getX_POS(), posY,
                             game.getPoles()[p].getPole().getElementAt(d).getSize() * 11 + 10, 5);
