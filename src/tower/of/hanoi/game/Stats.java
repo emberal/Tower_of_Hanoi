@@ -8,36 +8,39 @@ import java.util.Scanner;
 
 public abstract class Stats {
 
-    public static long start;
     private static final String statsFile = "assets/stats.dat";
 
-    public static void stats() {
+    public static void stats(long timeMs) {
 
-        long timeMs = System.currentTimeMillis() - start;
-        System.out.println(timeMs + "ms");
+        System.out.println(timeMs + "ms | Autoplay=" + Main.autoplay);
 
-        String record = readFile(timeMs), recordLine = "";
+        String recordLine = "", timeMsg = "";
+        if (!Main.autoplay) {
+            String record = readFile(timeMs);
 
-        //Prints only if the player has played at least 1 round
-        try {
-            if (record.charAt(0) != '0') { //Throws exception if the file does not exist
-                recordLine = ("The previous record was: " + record + ".\n");
+            //Prints only if the player has played at least 1 round
+            try {
+                if (record.charAt(0) != '0') { //Throws exception if the file does not exist
+                    recordLine = ("The previous record was: " + record + ".\n");
+                }
             }
-        }
-        catch (StringIndexOutOfBoundsException e) {
-            System.out.println(e.getMessage());
+            catch (StringIndexOutOfBoundsException e) {
+                System.out.println(e.getMessage());
+            }
+            timeMsg = "It took you " + Main.turns + " turns and " + calcTime(timeMs) + '\n';
         }
 
         boolean ok, reset = false;
         do {
             ok = true;
             try {
-                reset = Character.toLowerCase(JOptionPane.showConfirmDialog(null, "Board size: " + Main.POLES + '\n' +
+                reset = Character.toLowerCase(JOptionPane.showConfirmDialog(
+                        null, "Board size: " + Main.POLES + '\n' +
                         "Number of disks: " + Main.disks + '\n' +
                         "Congratulations, you won!\n" +
-                        "It took you " + Main.turns + " turns and " + calcTime(timeMs) + '\n' +
+                        timeMsg +
                         recordLine +
-                        "Would you like to play again? (Y/N)")) == 0;
+                        "Would you like to play again?")) == 0;
             }
             catch (StringIndexOutOfBoundsException e) {
                 JOptionPane.showMessageDialog(null, Main.stringOutOfBounds);
@@ -84,7 +87,7 @@ public abstract class Stats {
      * @param timeMs Time furing the current game in ms
      * @return A string representation of the data in stats.dat
      */
-    private static String readFile(long timeMs) {
+    private static String readFile(long timeMs) { //TODO use better methods
 
         File stats = new File(statsFile);
 
@@ -127,9 +130,7 @@ public abstract class Stats {
                 }
                 diskNr++;
             }
-            if (!Main.autoplay) { //Only writeToFile if autoplay is off
-                writeToFile(records, times);
-            }
+            writeToFile(records, times);
         }
         catch (FileNotFoundException e) {
             System.out.println("File not found! Trying to create new file: " + statsFile);
@@ -153,9 +154,9 @@ public abstract class Stats {
 
         //Creates folder if it doesn't exist
         File assets = new File("assets");
-        if (!assets.exists()) {
-            if (assets.mkdir()) {
-                System.out.println("Folder created!");
+        if (!assets.exists() ) {
+            if (assets.mkdir() ) {
+                System.out.println("Folder created at " + assets.getAbsolutePath());
             }
         }
 

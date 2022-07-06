@@ -22,19 +22,18 @@ public class Pole extends Draw {
 
     /**
      * Moves a disk to the given position
-     *
-     * @param pole The pole the disk will be moved to
+     * @param newPole The newPole the disk will be moved to
      * @return true if successfully moved, false otherwise
      */
-    public boolean moveTo(Pole pole) {
+    public boolean moveTo(Pole newPole) {
 
         if (isLegal(pole)) {
             System.out.println("Moving " + this.pole.seeLast() + " to " + pole.getPOSITION());
 
             //moveEllipse(super.disks[nr], 1,1); //TODO move method, change values!
 
-            pole.pole.push(this.pole.pop());
-            pole.pole.seeLast().setPosition(pole.POSITION);
+            newPole.pole.push(this.pole.pop());
+            newPole.pole.seeLast().setPosition(newPole.POSITION);
             Main.turns++;
 
             return true;

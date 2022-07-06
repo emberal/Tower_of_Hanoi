@@ -8,9 +8,12 @@ import javax.swing.*;
 
 public class Play extends Draw {
 
+    private long timeMs;
+
     public Play(Game game, boolean autoplay) {
         super(game); //Draws the board
-        Stats.start = System.currentTimeMillis(); //Starts the timer
+
+        timeMs = System.currentTimeMillis(); //Starts the timer
 
         if (!autoplay) {
             startGame();
@@ -22,8 +25,6 @@ public class Play extends Draw {
 
     //Starts the game
     private void startGame() {
-
-        Stats.start = System.currentTimeMillis(); //Starts the timer
 
         boolean ok;
         do { //Choose Pole
@@ -77,7 +78,8 @@ public class Play extends Draw {
             }
         } while (!game.isFinished());
 
-        Stats.stats();
+        timeMs = System.currentTimeMillis() - timeMs;
+        Stats.stats(timeMs);
     }
 
     /**
@@ -88,10 +90,11 @@ public class Play extends Draw {
         Pole[] pole = game.getPoles();
 
         solve(pole[0].getNrOfDisks(), pole[0], pole[1], pole[2]);
+        timeMs = System.currentTimeMillis() - timeMs;
 
         run(); //Draws the new window
         game.printAllArrays();
-        Stats.stats();
+        Stats.stats(timeMs);
     }
 
     /**
